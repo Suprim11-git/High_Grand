@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+    <div class="announcement-bar">
+        <p>High Grand Admin &nbsp;|&nbsp; Smart E-Commerce Management</p>
+    </div>
+
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-brand">
+                <img src="../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <span class="sidebar-label">Admin Panel</span>
+
+            <nav aria-label="Admin navigation">
+                <a href="dashboard.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="categories.html"><i class="fas fa-layer-group"></i> Categories</a>
+                <a href="orders.html"><i class="fas fa-receipt"></i> Orders</a>
+                <a href="inventory.html"><i class="fas fa-boxes-stacked"></i> Inventory</a>
+                <a href="users.html"><i class="fas fa-users"></i> Users</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../Home.html"><i class="fas fa-store"></i> View storefront</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Executive overview of sales, orders, catalog, and customer metrics.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="add_products.html" class="btn btn-primary"><i class="fas fa-plus"></i> Add Product</a>
+                    <a href="../pages/auth/login.html" class="btn btn-outline"><i class="fas fa-arrow-right-from-bracket"></i> Logout</a>
+                </div>
+            </header>
+
+            <!-- Alert Banner -->
+            <div class="alert alert-warning">
+                <i class="fas fa-triangle-exclamation"></i>
+                <div>
+                    <strong>Inventory Notice:</strong> 3 items have fallen below the safety stock threshold. 
+                    <a href="inventory.html" style="text-decoration: underline; font-weight: 600; margin-left: 0.4rem;">Check Inventory &rarr;</a>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <section class="dashboard-cards" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="card">
+                    <h3>Total Revenue</h3>
+                    <p>Rs. 1,485,200</p>
+                    <div class="card-meta"><span style="color: var(--color-new); font-weight: 600;"><i class="fas fa-arrow-trend-up"></i> +14.2%</span> vs last month</div>
+                </div>
+
+                <div class="card">
+                    <h3>Total Orders</h3>
+                    <p>142</p>
+                    <div class="card-meta"><span style="color: var(--color-new); font-weight: 600;"><i class="fas fa-arrow-trend-up"></i> +8.5%</span> this month</div>
+                </div>
+
+                <div class="card">
+                    <h3>Total Products</h3>
+                    <p>125</p>
+                    <div class="card-meta">Across 6 luxury categories</div>
+                </div>
+
+                <div class="card">
+                    <h3>Active Users</h3>
+                    <p>350</p>
+                    <div class="card-meta"><span style="color: var(--color-new); font-weight: 600;">+24</span> registered this week</div>
+                </div>
+            </section>
+
+            <!-- Split Section: Recent Orders & Top Sellers -->
+            <div class="grid-2 dashboard-section">
+                <!-- Left: Recent Orders -->
+                <div>
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Orders</h2>
+                        <a href="orders.html" class="btn btn-outline btn-sm">View All Orders</a>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#HG-8942</strong></td>
+                                    <td>
+                                        <div>Eleanor Vance</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">eleanor.v@example.com</div>
+                                    </td>
+                                    <td>Today, 10:24 AM</td>
+                                    <td><span class="badge badge-warning">Processing</span></td>
+                                    <td>Rs. 24,500</td>
+                                    <td>
+                                        <a href="order_details.html" class="btn btn-outline btn-sm">Details</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#HG-8941</strong></td>
+                                    <td>
+                                        <div>Julian Sterling</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">julian@sterling.com</div>
+                                    </td>
+                                    <td>Yesterday</td>
+                                    <td><span class="badge badge-info">Shipped</span></td>
+                                    <td>Rs. 18,200</td>
+                                    <td>
+                                        <a href="order_details.html" class="btn btn-outline btn-sm">Details</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#HG-8940</strong></td>
+                                    <td>
+                                        <div>Sophia Laurent</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">sophia.l@lux.com</div>
+                                    </td>
+                                    <td>Sep 03, 2026</td>
+                                    <td><span class="badge badge-success">Delivered</span></td>
+                                    <td>Rs. 42,000</td>
+                                    <td>
+                                        <a href="order_details.html" class="btn btn-outline btn-sm">Details</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#HG-8939</strong></td>
+                                    <td>
+                                        <div>Marcus Croft</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">m.croft@domain.co</div>
+                                    </td>
+                                    <td>Sep 02, 2026</td>
+                                    <td><span class="badge badge-success">Delivered</span></td>
+                                    <td>Rs. 9,500</td>
+                                    <td>
+                                        <a href="order_details.html" class="btn btn-outline btn-sm">Details</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#HG-8938</strong></td>
+                                    <td>
+                                        <div>Claire Montgomery</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">claire.m@artisan.org</div>
+                                    </td>
+                                    <td>Sep 01, 2026</td>
+                                    <td><span class="badge badge-danger">Cancelled</span></td>
+                                    <td>Rs. 15,400</td>
+                                    <td>
+                                        <a href="order_details.html" class="btn btn-outline btn-sm">Details</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right: Top Products & Quick Links -->
+                <div>
+                    <div class="section-header">
+                        <h2 class="section-title">Best Sellers</h2>
+                        <a href="products.html" class="btn btn-outline btn-sm">Catalog</a>
+                    </div>
+
+                    <div class="detail-card">
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <img src="../assets/images/shoes.jpg" alt="Oxford Shoes" style="width: 44px; height: 44px; border-radius: var(--radius); object-fit: cover;">
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 0.85rem;">Grand Oxford Classic</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">Footwear &bull; Rs. 14,500</div>
+                                    </div>
+                                </div>
+                                <span style="font-weight: 600; font-size: 0.85rem; color: var(--color-gold);">48 sold</span>
+                            </div>
+
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <img src="../assets/images/category_watch.jpg" alt="Chronograph Watch" style="width: 44px; height: 44px; border-radius: var(--radius); object-fit: cover;">
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 0.85rem;">Gold Chronograph</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">Watches &bull; Rs. 28,000</div>
+                                    </div>
+                                </div>
+                                <span style="font-weight: 600; font-size: 0.85rem; color: var(--color-gold);">36 sold</span>
+                            </div>
+
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <img src="../assets/images/perfume.jpg" alt="Eau De Parfum" style="width: 44px; height: 44px; border-radius: var(--radius); object-fit: cover;">
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 0.85rem;">Grand Noir Parfum</div>
+                                        <div style="font-size: 0.75rem; color: var(--color-text-muted);">Fragrances &bull; Rs. 8,900</div>
+                                    </div>
+                                </div>
+                                <span style="font-weight: 600; font-size: 0.85rem; color: var(--color-gold);">31 sold</span>
+                            </div>
+                        </div>
+
+                        <hr style="margin: 1.25rem 0; border: none; border-top: 1px solid var(--color-border);">
+
+                        <h4 style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-gold); margin-bottom: 0.85rem;">Quick Operations</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <a href="add_products.html" class="btn btn-outline btn-sm" style="justify-content: flex-start;"><i class="fas fa-plus"></i> New Product</a>
+                            <a href="categories.html" class="btn btn-outline btn-sm" style="justify-content: flex-start;"><i class="fas fa-folder-plus"></i> Manage Categories</a>
+                            <a href="inventory.html" class="btn btn-outline btn-sm" style="justify-content: flex-start;"><i class="fas fa-boxes-stacked"></i> Stock Adjustments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

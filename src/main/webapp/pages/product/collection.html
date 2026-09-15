@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="announcement-bar">
+        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
+    </div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../../Home.html" class="brand-logo">
+                <img src="../../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li class="active"><a href="category.html">Shop</a></li>
+                    <li><a href="../account/blog.html">Blog</a></li>
+                    <li><a href="../account/about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <form class="header-search" role="search" action="category.html" method="get">
+                    <input type="search" name="q" placeholder="Search fashion & accessories..." aria-label="Search products">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="header-icons">
+                    <a href="../auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="../cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
+                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <ul>
+                <li><a href="../../Home.html">Home</a></li>
+                <li><a href="category.html">Shop</a></li>
+                <li><a href="../account/blog.html">Blog</a></li>
+                <li><a href="../account/about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="../../Home.html">Home</a> / <a href="category.html">Shop</a> / Collection</p>
+            <span class="section-label">The Latest Collection</span>
+            <h1>Featured Products</h1>
+            <p>Static catalog preview. Listing, search, and category filters will be loaded from the backend.</p>
+        </section>
+
+        <div class="page-wrap shop-layout">
+            <aside class="shop-sidebar">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="category.html">All</a></li>
+                    <li><a class="active" href="collection.html">New In</a></li>
+                    <li><a href="collection.html">Women's Wear</a></li>
+                    <li><a href="collection.html">Men's Wear</a></li>
+                    <li><a href="collection.html">Footwear</a></li>
+                    <li><a href="collection.html">Accessories</a></li>
+                </ul>
+            </aside>
+
+            <div>
+                <div class="shop-toolbar">
+                    <p>Showing 0 products</p>
+                    <form method="get" action="collection.html">
+                        <select name="sort" aria-label="Sort products">
+                            <option value="featured">Featured</option>
+                            <option value="newest">Newest</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div class="product-grid">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+}
+
+body {
+    background-color: #D2D2D2;
+    color: white;
+    color: black;
+}
+
+.p_head {
+    background-color: #7b7676;
+    display: flex;
+    height: 50px;
+    padding-top: 15px;
+}
+
+.p_logo {
+    flex: 3;
+    margin-left: 40px;
+}
+
+.p_logo img {
+    width: 35px;
+}
+
+.p_bar {
+    padding-top: 10px;
+    flex: 6;
+}
+
+.p_bar ul {
+    display: flex;
+}
+
+.p_bar ul li {
+    list-style: none;
+    margin-right: 50px;
+}
+
+.p_bar li a {
+    color: white;
+    text-decoration: none;
+}
+
+#p_page{
+    text-decoration: underline;
+    text-decoration-color: #fff;
+}
+
+.p_icon {
+    padding-top: 10px;
+    flex: 2;
+    align-items: center;
+}
+
+.p_icon i {
+    font-size: 15px;
+    margin-right: 20px;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.p_icon i:hover {
+    color: #ccc;
+}
+.p_body{
+width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+a {
+    text-decoration: none;
+}
+.p_blog-head {
+    background: #D2D2D2;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.p_blog-head h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.p_blog-head p {
+    color: #666;
+}
+
+.blog_p-body {
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.p_bpost {
+    width: 70%;
+    float: left;
+    padding-right: 30px;
+}
+
+.p_bar {
+    width: 30%;
+    float: right;
+}
+
+.p_feature {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #D2D2D2;
+    padding-bottom: 20px;
+}
+
+.p_feature img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.p_posts .category {
+    display: inline-block;
+    background: #020101;
+    color: #D2D2D2;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.category h3 a{
+    color: #d7cece;
+}
+
+.p_posts h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.p_posts .date {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.p_posts p {
+    margin-bottom: 15px;
+}
+
+.read-more {
+    color: #0b0000;
+    font-weight: 600;
+}
+.read_p{
+    padding-bottom: 10px;
+}
+
+.p_colmn {
+    background: #D2D2D2;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.p_colmn h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.p_colmn ul {
+    list-style: none;
+}
+
+.p_colmn ul li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    color: black;
+}
+
+.p_colmn ul li:last-child {
+    border-bottom: none;
+}
+
+.newsletter input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.newsletter button {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#email {
+    width: 30%;
+}
+
+.p_footer{
+    margin-top: 50px;
+    padding-top: 50px;
+    height: 200px;
+    background-color: #7b7676;
+    display: flex;
+    color: white;
+}
+.brand{
+    padding-left: 30px;
+    flex: 3;
+}
+.f_about{
+    flex: 3;
+}
+.f_policy{
+    flex: 3;
+}
+.f_ploicy ul li{
+    list-style: none;
+
+}
+.f_policy ul li a{
+    text-decoration: none;
+    color: white;
+}
+.f_info{
+    flex: 3;
+}
+.f_icons {
+    padding: 10px;
+    margin-top: 50px;
+}
+.f_icons h4{
+    margin-bottom: 20px;
+}
+.f_icons a{
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+}

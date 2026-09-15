@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="announcement-bar">
+        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
+    </div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../../Home.html" class="brand-logo">
+                <img src="../../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="../product/category.html">Shop</a></li>
+                    <li><a href="../account/blog.html">Blog</a></li>
+                    <li><a href="../account/about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="header-icons">
+                    <a href="../auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
+                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <ul>
+                <li><a href="../../Home.html">Home</a></li>
+                <li><a href="../product/category.html">Shop</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="../../Home.html">Home</a> / Cart</p>
+            <h1>Your Shopping Cart</h1>
+            <p>Sample cart items for layout. Quantities and totals will be calculated on the server.</p>
+        </section>
+
+        <div class="page-wrap cart-layout">
+            <div class="table-card">
+                <div class="cart-item">
+                    <img src="../../assets/images/womenwear.jpg" alt="Silk Blend Midi Dress">
+                    <div>
+                        <h3>Silk Blend Midi Dress</h3>
+                        <p>Women's Wear · Size M</p>
+                    </div>
+                    <div>
+                        <p>$89.99</p>
+                        <label>Qty <input type="number" name="qty" value="1" min="1"></label>
+                    </div>
+                </div>
+                <div class="cart-item">
+                    <img src="../../assets/images/shoes.jpg" alt="Leather Chelsea Boots">
+                    <div>
+                        <h3>Leather Chelsea Boots</h3>
+                        <p>Footwear · Size 41</p>
+                    </div>
+                    <div>
+                        <p>$129.99</p>
+                        <label>Qty <input type="number" name="qty" value="1" min="1"></label>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="summary-card">
+                <h2>Order Summary</h2>
+                <div class="summary-row"><span>Subtotal</span><span>$219.98</span></div>
+                <div class="summary-row"><span>Shipping</span><span>Free</span></div>
+                <div class="summary-row total"><span>Total</span><span>$219.98</span></div>
+                <a href="../checkout/checkout.html" class="btn btn-primary" style="width:100%;margin-top:1.25rem;">Proceed to Checkout</a>
+                <a href="../product/category.html" class="btn btn-outline" style="width:100%;margin-top:0.75rem;">Continue Shopping</a>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+</body>
+
+</html>

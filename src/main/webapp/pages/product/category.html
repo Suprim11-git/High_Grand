@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="announcement-bar">
+        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
+    </div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../../Home.html" class="brand-logo">
+                <img src="../../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li class="active"><a href="category.html">Shop</a></li>
+                    <li><a href="../account/blog.html">Blog</a></li>
+                    <li><a href="../account/about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <form class="header-search" role="search" action="category.html" method="get">
+                    <input type="search" name="q" placeholder="Search fashion & accessories..." aria-label="Search products">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="header-icons">
+                    <a href="../auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="../account/favorites.html" aria-label="Favorites" class="header-fav-link"><i class="fas fa-heart"></i><span class="fav-badge" style="display:none;"></span></a>
+                    <a href="../cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
+                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <ul>
+                <li><a href="../../Home.html">Home</a></li>
+                <li><a href="category.html">Shop</a></li>
+                <li><a href="../account/blog.html">Blog</a></li>
+                <li><a href="../account/about.html">About</a></li>
+                <li><a href="../account/favorites.html">Favorites</a></li>
+                <li><a href="../auth/login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="../../Home.html">Home</a> / Shop</p>
+            <span class="section-label">Browse by Category</span>
+            <h1>Shop Fashion & Accessories</h1>
+            <p>Explore curated collections or browse our full product catalog below.</p>
+        </section>
+
+        <section class="categories section" style="padding-top: 0;">
+            <div class="category-grid">
+                <!-- Dynamically loaded from /api/categories -->
+            </div>
+        </section>
+
+        <section class="featured section" style="padding-top: 0;">
+            <div class="section-header">
+                <span class="section-label">Catalog</span>
+                <h2>All Products</h2>
+                <p id="catalogProductCount">Showing products</p>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-chip active" data-filter="all">All</button>
+            </div>
+
+            <div class="product-grid">
+                <!-- Dynamically loaded from /api/products -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>HIGH GRAND</h3>
+                <p class="tagline">Own Your Version</p>
+                <p class="footer-desc">Premium fashion wear and accessories for the modern lifestyle.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="category.html">Shop</a></li>
+                    <li><a href="../account/about.html">About Us</a></li>
+                    <li><a href="../account/blog.html">Fashion Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="../auth/login.html">My Account</a></li>
+                    <li><a href="../order/list.html">Order History</a></li>
+                    <li><a href="../cart/cart.html">Shopping Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +977 980-1234567</p>
+                <p><i class="fas fa-envelope"></i> support@highgrand.com</p>
+                <p><i class="fas fa-location-dot"></i> Kathmandu, Nepal</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+</body>
+
+</html>

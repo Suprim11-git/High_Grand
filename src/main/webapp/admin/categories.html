@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - High Grand Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body data-page="categories">
+
+    <div class="announcement-bar">
+        <p>High Grand Admin &nbsp;|&nbsp; Smart E-Commerce Management</p>
+    </div>
+
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-brand">
+                <img src="../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <span class="sidebar-label">Admin Panel</span>
+
+            <nav aria-label="Admin navigation">
+                <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="categories.html" class="active"><i class="fas fa-layer-group"></i> Categories</a>
+                <a href="orders.html"><i class="fas fa-receipt"></i> Orders</a>
+                <a href="inventory.html"><i class="fas fa-boxes-stacked"></i> Inventory</a>
+                <a href="users.html"><i class="fas fa-users"></i> Users</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../Home.html"><i class="fas fa-store"></i> View storefront</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Collections & Categories</h1>
+                    <p>Organize, curate, and structure storefront collections and taxonomy.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="../pages/auth/login.html" class="btn btn-outline">Logout</a>
+                </div>
+            </header>
+
+            <div class="grid-2">
+                <div>
+                    <div class="toolbar">
+                        <label class="search-field" style="max-width: 320px;">
+                            <input type="search" placeholder="Search categories..." aria-label="Search categories">
+                            <span><i class="fas fa-search"></i></span>
+                        </label>
+                        <span style="font-size: 0.85rem; color: var(--color-text-muted);">7 Active Collections</span>
+                    </div>
+
+                    <div class="grid-cards">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-card" style="position: sticky; top: 1.5rem;">
+                        <h3 style="font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border);">
+                            Add New Category
+                        </h3>
+
+                        <form class="admin-form" action="#" method="post" data-category-form>
+                            <div>
+                                <label for="catName">Category Title *</label>
+                                <input type="text" id="catName" name="catName" placeholder="e.g. Fine Jewelry" required>
+                            </div>
+
+                            <div>
+                                <label for="catSlug">URL Slug</label>
+                                <input type="text" id="catSlug" name="catSlug" placeholder="fine-jewelry">
+                            </div>
+
+                            <div>
+                                <label for="catOrder">Display Priority</label>
+                                <input type="number" id="catOrder" name="catOrder" value="1" min="1">
+                            </div>
+
+                            <div>
+                                <label for="image">Category Hero Image</label>
+                                <input type="file" id="image" name="catImage" accept="image/*">
+                                <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                                    <img id="imagePreview" src="" alt="Category preview">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="catDesc">Description</label>
+                                <textarea id="catDesc" name="catDesc" placeholder="Brief summary of this collection for storefront banners..." style="min-height: 90px;"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="catStatus">Status</label>
+                                <select id="catStatus" name="catStatus">
+                                    <option value="Active">Active</option>
+                                    <option value="Draft">Draft (Hidden)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-plus"></i> Save Category</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

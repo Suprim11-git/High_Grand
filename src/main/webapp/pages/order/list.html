@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="announcement-bar">
+        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
+    </div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../../Home.html" class="brand-logo">
+                <img src="../../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="../product/category.html">Shop</a></li>
+                    <li><a href="../account/blog.html">Blog</a></li>
+                    <li><a href="../account/about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="header-icons">
+                    <a href="../auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="../cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
+                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <ul>
+                <li><a href="list.html">Orders</a></li>
+                <li><a href="../auth/login.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="../../Home.html">Home</a> / Orders</p>
+            <h1>Order History</h1>
+            <p>Sample orders for layout. Tracking and status updates will come from the backend.</p>
+        </section>
+
+        <div class="page-wrap">
+            <article class="order-card">
+                <div>
+                    <h3>Order #HG-1042</h3>
+                    <p>Placed on 12 Aug 2026 · 2 items</p>
+                </div>
+                <p>$219.98</p>
+                <span class="status status-delivered">Delivered</span>
+                <a href="../product/product.html" class="btn btn-outline">View items</a>
+            </article>
+
+            <article class="order-card">
+                <div>
+                    <h3>Order #HG-1038</h3>
+                    <p>Placed on 02 Aug 2026 · 1 item</p>
+                </div>
+                <p>$64.99</p>
+                <span class="status status-shipped">Shipped</span>
+                <a href="../product/product.html" class="btn btn-outline">Track</a>
+            </article>
+
+            <article class="order-card">
+                <div>
+                    <h3>Order #HG-1021</h3>
+                    <p>Placed on 18 Jul 2026 · 3 items</p>
+                </div>
+                <p>$254.97</p>
+                <span class="status status-processing">Processing</span>
+                <a href="../checkout/checkout.html" class="btn btn-outline">Details</a>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+</body>
+
+</html>

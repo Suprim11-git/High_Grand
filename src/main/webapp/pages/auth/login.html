@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/login.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <main>
+        <div class="login-page-wrap">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-emblem">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <span class="section-label">Member </span>
+                    <h1>Welcome Back</h1>
+                    <p>Sign in to access your curated wardrobe, active orders, and exclusive member privileges.</p>
+                </div>
+
+                <form class="login-form" id="loginForm" action="/login" method="post">
+                    <div id="loginError" style="display: none; background: #fdecea; color: #b3261e; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.85rem; margin-bottom: 1.25rem; font-weight: 500;">
+                        <i class="fas fa-circle-exclamation" style="margin-right: 0.4rem;"></i>
+                        <span id="loginErrorText">Invalid username or password.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username or Email</label>
+                        <div class="input-with-icon">
+                            <i class="far fa-user input-icon"></i>
+                            <input type="text" id="username" name="username" placeholder="Username or email" required autocomplete="username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                            <button type="button" class="password-toggle-btn" id="togglePassword" aria-label="Toggle password visibility">
+                                <i class="far fa-eye" id="togglePasswordIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="login-utility-row">
+                        <label class="form-check">
+                            <input type="checkbox" name="remember" id="remember">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password-link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-login-submit">
+                        <span>Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <div class="login-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <div class="social-login-grid">
+                        <button type="button" class="btn-social">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button type="button" class="btn-social">
+                            <i class="fab fa-apple"></i>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+
+                    <div class="login-footer-switch">
+                        <p>Not a member yet? <a href="signup.html">Create an account</a></p>
+                    </div>
+
+                    <div class="login-security-badge">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+
+    <script>
+        (function () {
+
+            var toggleBtn =
+                document.getElementById('togglePassword');
+
+            var passwordInput =
+                document.getElementById('password');
+
+            var toggleIcon =
+                document.getElementById('togglePasswordIcon');
+
+            if (toggleBtn &&
+                passwordInput &&
+                toggleIcon) {
+
+                toggleBtn.addEventListener('click', function () {
+
+                    var isPassword =
+                        passwordInput.getAttribute('type') === 'password';
+
+                    passwordInput.setAttribute(
+                        'type',
+                        isPassword ? 'text' : 'password'
+                    );
+
+                    toggleIcon.classList.toggle(
+                        'fa-eye',
+                        !isPassword
+                    );
+
+                    toggleIcon.classList.toggle(
+                        'fa-eye-slash',
+                        isPassword
+                    );
+                });
+            }
+
+            var params =
+                new URLSearchParams(window.location.search);
+
+            var error =
+                params.get('error');
+
+            var registered =
+                params.get('registered');
+
+            var logout =
+                params.get('logout');
+
+            var errorBox =
+                document.getElementById('loginError');
+
+            var errorText =
+                document.getElementById('loginErrorText');
+
+
+            if (error === 'invalid' &&
+                errorBox &&
+                errorText) {
+
+                errorText.textContent =
+                    'Invalid username/email or password.';
+
+                errorBox.style.display =
+                    'block';
+            }
+
+
+            if (error === 'access' &&
+                errorBox &&
+                errorText) {
+
+                errorText.textContent =
+                    'You do not have permission to access that page.';
+
+                errorBox.style.display =
+                    'block';
+            }
+
+
+            if (registered) {
+
+                alert(
+                    'Registration successful. Please log in.'
+                );
+            }
+
+
+            if (logout) {
+
+                alert(
+                    'You have been logged out successfully.'
+                );
+            }
+
+        })();
+    </script>
+</body>
+
+</html>

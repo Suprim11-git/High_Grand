@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Catalog - High Grand Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body data-page="products">
+
+    <div class="announcement-bar">
+        <p>High Grand Admin &nbsp;|&nbsp; Smart E-Commerce Management</p>
+    </div>
+
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-brand">
+                <img src="../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <span class="sidebar-label">Admin Panel</span>
+
+            <nav aria-label="Admin navigation">
+                <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="products.html" class="active"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="categories.html"><i class="fas fa-layer-group"></i> Categories</a>
+                <a href="orders.html"><i class="fas fa-receipt"></i> Orders</a>
+                <a href="inventory.html"><i class="fas fa-boxes-stacked"></i> Inventory</a>
+                <a href="users.html"><i class="fas fa-users"></i> Users</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../Home.html"><i class="fas fa-store"></i> View storefront</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Products Catalog</h1>
+                    <p>Manage store catalog, prices, categories, and inventory stock levels.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="add_products.html" class="btn btn-primary"><i class="fas fa-plus"></i> Add Product</a>
+                    <a href="../pages/auth/login.html" class="btn btn-outline">Logout</a>
+                </div>
+            </header>
+
+            <div class="toolbar">
+                <div style="display: flex; gap: 0.75rem; align-items: center; flex: 1; flex-wrap: wrap;">
+                    <label class="search-field">
+                        <input type="search" placeholder="Search catalog items, SKU..." aria-label="Search products">
+                        <span><i class="fas fa-search"></i></span>
+                    </label>
+
+                    <select id="categoryFilter" class="filter-select" aria-label="Filter by category">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
+
+                <div>
+                    <span style="font-size: 0.85rem; color: var(--color-text-muted);" id="totalProductsBadge">Total 0 Items</span>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>SKU</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <div id="productPaginationText">Showing 0 items</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

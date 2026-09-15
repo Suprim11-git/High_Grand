@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - High Grand Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+    <div class="announcement-bar">
+        <p>High Grand Admin &nbsp;|&nbsp; Smart E-Commerce Management</p>
+    </div>
+
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-brand">
+                <img src="../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <span class="sidebar-label">Admin Panel</span>
+
+            <nav aria-label="Admin navigation">
+                <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="categories.html"><i class="fas fa-layer-group"></i> Categories</a>
+                <a href="orders.html" class="active"><i class="fas fa-receipt"></i> Orders</a>
+                <a href="inventory.html"><i class="fas fa-boxes-stacked"></i> Inventory</a>
+                <a href="users.html"><i class="fas fa-users"></i> Users</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../Home.html"><i class="fas fa-store"></i> View storefront</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Orders Management</h1>
+                    <p>Track customer purchases, fulfillment stages, payment confirmations, and refunds.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="../pages/auth/login.html" class="btn btn-outline">Logout</a>
+                </div>
+            </header>
+
+            <!-- Filter Tabs & Search Toolbar -->
+            <div class="filter-bar">
+                <div class="tab-group">
+                    <button type="button" class="tab-btn active" data-filter="all">All Orders</button>
+                    <button type="button" class="tab-btn" data-filter="pending">Pending</button>
+                    <button type="button" class="tab-btn" data-filter="processing">Processing</button>
+                    <button type="button" class="tab-btn" data-filter="shipped">Shipped</button>
+                    <button type="button" class="tab-btn" data-filter="delivered">Delivered</button>
+                    <button type="button" class="tab-btn" data-filter="cancelled">Cancelled</button>
+                </div>
+
+                <label class="search-field" style="max-width: 320px;">
+                    <input type="search" placeholder="Search order ID, customer, email..." aria-label="Search orders">
+                    <span><i class="fas fa-search"></i></span>
+                </label>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Items</th>
+                            <th>Payment</th>
+                            <th>Fulfillment</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-status="processing">
+                            <td><strong>#HG-8942</strong></td>
+                            <td>
+                                <div>Eleanor Vance</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">eleanor.v@example.com</div>
+                            </td>
+                            <td>Sep 05, 2026 &bull; 10:24 AM</td>
+                            <td>2 items</td>
+                            <td><span class="badge badge-success">Paid</span></td>
+                            <td><span class="badge badge-warning">Processing</span></td>
+                            <td><strong>Rs. 24,500</strong></td>
+                            <td>
+                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+
+                        <tr data-status="shipped">
+                            <td><strong>#HG-8941</strong></td>
+                            <td>
+                                <div>Julian Sterling</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">julian@sterling.com</div>
+                            </td>
+                            <td>Sep 04, 2026 &bull; 03:15 PM</td>
+                            <td>1 item</td>
+                            <td><span class="badge badge-success">Paid</span></td>
+                            <td><span class="badge badge-info">Shipped</span></td>
+                            <td><strong>Rs. 18,200</strong></td>
+                            <td>
+                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+
+                        <tr data-status="delivered">
+                            <td><strong>#HG-8940</strong></td>
+                            <td>
+                                <div>Sophia Laurent</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">sophia.l@lux.com</div>
+                            </td>
+                            <td>Sep 03, 2026 &bull; 11:42 AM</td>
+                            <td>3 items</td>
+                            <td><span class="badge badge-success">Paid</span></td>
+                            <td><span class="badge badge-success">Delivered</span></td>
+                            <td><strong>Rs. 42,000</strong></td>
+                            <td>
+                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+
+                        <tr data-status="delivered">
+                            <td><strong>#HG-8939</strong></td>
+                            <td>
+                                <div>Marcus Croft</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">m.croft@domain.co</div>
+                            </td>
+                            <td>Sep 02, 2026 &bull; 04:50 PM</td>
+                            <td>1 item</td>
+                            <td><span class="badge badge-success">Paid</span></td>
+                            <td><span class="badge badge-success">Delivered</span></td>
+                            <td><strong>Rs. 9,500</strong></td>
+                            <td>
+                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+
+                        <tr data-status="cancelled">
+                            <td><strong>#HG-8938</strong></td>
+                            <td>
+                                <div>Claire Montgomery</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">claire.m@artisan.org</div>
+                            </td>
+                            <td>Sep 01, 2026 &bull; 01:10 PM</td>
+                            <td>1 item</td>
+                            <td><span class="badge badge-danger">Refunded</span></td>
+                            <td><span class="badge badge-danger">Cancelled</span></td>
+                            <td><strong>Rs. 15,400</strong></td>
+                            <td>
+                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+
+                        <tr data-status="delivered">
+                            <td><strong>#HG-8937</strong></td>
+                            <td>
+                                <div>Liam Gallagher</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">liam.g@gmail.com</div>
+                            </td>
+                            <td>Aug 31, 2026 &bull; 09:20 AM</td>
+                            <td>2 items</td>
+                            <td><span class="badge badge-success">Paid</span></td>
+                            <td><span class="badge badge-success">Delivered</span></td>
+                            <td><strong>Rs. 32,500</strong></td>
+                            <td>
+                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+
+                        <tr data-status="pending">
+                            <td><strong>#HG-8936</strong></td>
+                            <td>
+                                <div>Amelia Hayes</div>
+                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">amelia.hayes@outlook.com</div>
+                            </td>
+                            <td>Aug 30, 2026 &bull; 02:45 PM</td>
+                            <td>1 item</td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td><strong>Rs. 8,900</strong></td>
+                            <td>
+                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <div>Showing 1 to 7 of 142 orders</div>
+                <div class="page-numbers">
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <span>...</span>
+                    <a href="#">18</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

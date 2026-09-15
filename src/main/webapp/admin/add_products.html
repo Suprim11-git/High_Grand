@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - High Grand Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body data-page="add">
+
+    <div class="announcement-bar">
+        <p>High Grand Admin &nbsp;|&nbsp; Smart E-Commerce Management</p>
+    </div>
+
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-brand">
+                <img src="../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <span class="sidebar-label">Admin Panel</span>
+
+            <nav aria-label="Admin navigation">
+                <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="products.html" class="active"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="categories.html"><i class="fas fa-layer-group"></i> Categories</a>
+                <a href="orders.html"><i class="fas fa-receipt"></i> Orders</a>
+                <a href="inventory.html"><i class="fas fa-boxes-stacked"></i> Inventory</a>
+                <a href="users.html"><i class="fas fa-users"></i> Users</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../Home.html"><i class="fas fa-store"></i> View storefront</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Add New Product</h1>
+                    <p>Create and publish a new luxury item to the High Grand collection.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="products.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to Products</a>
+                </div>
+            </header>
+
+            <div class="form-card" style="max-width: 760px;">
+                <form class="admin-form" action="/admin/add_product" method="post" enctype="multipart/form-data">
+                    <div>
+                        <label for="productName">Product Name *</label>
+                        <input type="text" id="productName" name="productName" required>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div>
+                            <label for="category">Category *</label>
+                            <select id="category" name="category" data-category-options required>
+                                <option value="">Select Category</option>
+                                <option value="Footwear">Footwear</option>
+                                <option value="Men's Wear">Men's Wear</option>
+                                <option value="Women's Wear">Women's Wear</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Fragrances">Fragrances</option>
+                                <option value="Bags & Leather">Bags & Leather</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="sku">SKU Identifier *</label>
+                            <input type="text" id="sku" name="sku" placeholder="e.g. HG-SH-102" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div>
+                            <label for="price">Regular Price (Rs.) *</label>
+                            <input type="number" id="price" name="price" min="0" step="0.01" placeholder="14500" required>
+                        </div>
+
+                        <div>
+                            <label for="salePrice">Sale / Promotional Price (Rs.)</label>
+                            <input type="number" id="salePrice" name="salePrice" min="0" step="0.01" placeholder="Optional discounted price">
+                        </div>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div>
+                            <label for="stock">Initial Stock Quantity *</label>
+                            <input type="number" id="stock" name="stock" min="0" placeholder="e.g. 25" required>
+                        </div>
+
+                        <div>
+                            <label for="minStock">Low Stock Threshold</label>
+                            <input type="number" id="minStock" name="minStock" min="0" value="5">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="image">Product Image</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+                        <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                            <img id="imagePreview" src="" alt="Selected product preview">
+                            <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.4rem;">Selected Image Preview</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="status">Publication Status</label>
+                        <select id="status" name="status">
+                            <option value="Active">Active (Visible in Store)</option>
+                            <option value="Draft">Draft (Hidden)</option>
+                            <option value="Archived">Archived</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="description">Product Description & Craftsmanship</label>
+                        <textarea id="description" name="description" placeholder="Describe the materials, tailoring details, fit, and care instructions..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Publish Product</button>
+                        <a href="products.html" class="btn btn-outline">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

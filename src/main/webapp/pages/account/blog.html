@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Blog | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="announcement-bar">
+        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
+    </div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../../Home.html" class="brand-logo">
+                <img src="../../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="../product/category.html">Shop</a></li>
+                    <li class="active"><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="header-icons">
+                    <a href="../auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="favorites.html" aria-label="Favorites" class="header-fav-link"><i class="fas fa-heart"></i><span class="fav-badge" style="display:none;"></span></a>
+                    <a href="../cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
+                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <ul>
+                <li><a href="../../Home.html">Home</a></li>
+                <li><a href="../product/category.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="favorites.html">Favorites</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="../../Home.html">Home</a> / Blog</p>
+            <span class="section-label">Journal</span>
+            <h1>Fashion Blog</h1>
+            <p>Latest trends, styling notes, and collection stories.</p>
+        </section>
+
+        <div class="page-wrap blog-layout">
+            <div>
+                <article class="blog-card">
+                    <img src="../../assets/images/blog_fashion.jpg" alt="Summer fashion trends">
+                    <div class="blog-body">
+                        <span class="section-label">Trends</span>
+                        <h2>Top Fashion Trends for Summer 2026</h2>
+                        <p class="blog-meta">15 May 2026 · High Grand Editorial</p>
+                        <p>Light linens, fluid midi dresses, and warm gold accessories define the season. Shop the looks in our new arrivals and pair them with minimal sneakers or chelsea boots.</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="../../assets/images/blog_style.jpg" alt="Styling denim">
+                    <div class="blog-body">
+                        <span class="section-label">Styling</span>
+                        <h2>How to Style Denim for Every Occasion</h2>
+                        <p class="blog-meta">10 May 2026 · Jane Doe</p>
+                        <p>From weekend denim-on-denim to a tailored shirt for dinner, these combinations keep the wardrobe versatile without extra pieces.</p>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <img src="../../assets/images/blog_offer.png" alt="Seasonal offer">
+                    <div class="blog-body">
+                        <span class="section-label">Offers</span>
+                        <h2>Selected items, limited-time savings</h2>
+                        <p class="blog-meta">5 May 2026 · High Grand Editorial</p>
+                        <p>Look for sale badges across the shop. Promotions will be managed from the admin catalog once the backend is connected.</p>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="blog-sidebar">
+                <div class="sidebar-box">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="blog.html">Trends</a></li>
+                        <li><a href="blog.html">Styling Tips</a></li>
+                        <li><a href="blog.html">Offers</a></li>
+                        <li><a href="../product/collection.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-box">
+                    <h3>Popular</h3>
+                    <ul>
+                        <li><a href="blog.html">Best dresses for summer</a></li>
+                        <li><a href="blog.html">How to accessorize</a></li>
+                        <li><a href="../product/collection.html">Limited sneaker drop</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-box">
+                    <h3>Subscribe</h3>
+                    <p style="font-size:0.85rem;color:var(--color-text-muted);margin-bottom:0.75rem;">Fashion news and drops, sent occasionally.</p>
+                    <form class="newsletter-form" action="#" method="post" style="flex-direction:column;max-width:none;">
+                        <input type="email" name="email" placeholder="Your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>HIGH GRAND</h3>
+                <p class="tagline">Own Your Version</p>
+                <p class="footer-desc">Premium fashion wear and accessories for the modern lifestyle.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="../product/category.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Fashion Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="../auth/login.html">My Account</a></li>
+                    <li><a href="../order/list.html">Order History</a></li>
+                    <li><a href="../cart/cart.html">Shopping Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +977 980-1234567</p>
+                <p><i class="fas fa-envelope"></i> support@highgrand.com</p>
+                <p><i class="fas fa-location-dot"></i> Kathmandu, Nepal</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+</body>
+
+</html>

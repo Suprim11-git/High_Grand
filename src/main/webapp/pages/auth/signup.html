@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <main>
+        <div class="auth-page">
+            <div class="auth-panel">
+                <span class="section-label">Get started</span>
+                <h1>Create your account</h1>
+                <p>Register to shop collections, track orders, and receive style updates.</p>
+
+                <form action="/register" method="post">
+
+
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+
+                        <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your full name"
+                                required
+                                maxlength="100"
+                                autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+
+                        <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Choose a username"
+                                required
+                                minlength="3"
+                                maxlength="50"
+                                autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+
+                        <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                required
+                                autocomplete="email">
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Create a password"
+                                    required
+                                    minlength="6"
+                                    autocomplete="new-password">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="confirm">
+                                Confirm password
+                            </label>
+
+                            <input
+                                    type="password"
+                                    id="confirm"
+                                    name="confirm_password"
+                                    placeholder="Repeat password"
+                                    required
+                                    minlength="6"
+                                    autocomplete="new-password">
+
+                        </div>
+
+                    </div>
+
+                    <label class="form-check">
+
+                        <input
+                                type="checkbox"
+                                name="terms"
+                                required>
+
+                        I agree to the terms and privacy policy
+
+                    </label>
+
+                    <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                        Sign Up
+
+                    </button>
+
+                    <p class="auth-switch">
+                        Already have an account?
+                        <a href="login.html">Log in</a>
+                    </p>
+                    <div
+                            id="signupMessage"
+                            style="display:none;"
+                            class="auth-message">
+                    </div>
+                </form>
+            </div>
+            <div class="auth-visual">
+                <div class="auth-vip-badge">
+                    <i class="fas fa-crown"></i>
+                    <span>Exclusive Member Privileges</span>
+                </div>
+                <span class="section-label">High Grand Circle</span>
+                <h2>Join a community crafted for style.</h2>
+                <p>Register today to unlock curated seasonal benefits tailored to your aesthetic.</p>
+
+                <ul class="auth-perks-list">
+                    <li class="auth-perk-item">
+                        <div class="auth-perk-icon"><i class="fas fa-percent"></i></div>
+                        <div class="auth-perk-text">
+                            <strong>15% Welcome Gift</strong>
+                            <span>Enjoy 15% off your inaugural designer wardrobe purchase.</span>
+                        </div>
+                    </li>
+                    <li class="auth-perk-item">
+                        <div class="auth-perk-icon"><i class="fas fa-gem"></i></div>
+                        <div class="auth-perk-text">
+                            <strong>Early Collection Access</strong>
+                            <span>Private previews to limited-edition runway and seasonal drops.</span>
+                        </div>
+                    </li>
+                    <li class="auth-perk-item">
+                        <div class="auth-perk-icon"><i class="fas fa-shipping-fast"></i></div>
+                        <div class="auth-perk-text">
+                            <strong>Complimentary Shipping &amp; Returns</strong>
+                            <span>Express courier delivery on all qualifying domestic orders.</span>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="auth-quote-box">
+                    <p>"High Grand redefined how I curate timeless wardrobe staples."</p>
+                    <span>— Verified Member Review</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+    <script>
+        (function () {
+
+            const params =
+                new URLSearchParams(window.location.search);
+
+            const error =
+                params.get("error");
+
+            const messageBox =
+                document.getElementById("signupMessage");
+
+            if (!messageBox || !error) {
+                return;
+            }
+
+            const messages = {
+
+                username:
+                    "Please enter a username.",
+
+                username_length:
+                    "Username must contain at least 3 characters.",
+
+                username_exists:
+                    "That username is already registered.",
+
+                email:
+                    "Please enter a valid email address.",
+
+                email_exists:
+                    "That email address is already registered.",
+
+                password:
+                    "Password must contain at least 6 characters.",
+
+                password_match:
+                    "Passwords do not match."
+            };
+
+            if (messages[error]) {
+
+                messageBox.textContent =
+                    messages[error];
+
+                messageBox.style.display =
+                    "block";
+            }
+
+        })();
+    </script>
+</body>
+
+</html>

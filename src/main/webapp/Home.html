@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="High Grand - Premium fashion wear and accessories. Shop the latest collections for men and women.">
+    <title>High Grand | Fashion Wear & Accessories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="announcement-bar">
+        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
+    </div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="Home.html" class="brand-logo">
+                <img src="assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li class="active"><a href="Home.html">Home</a></li>
+                    <li><a href="pages/product/category.html">Shop</a></li>
+                    <li><a href="pages/account/blog.html">Blog</a></li>
+                    <li><a href="pages/account/about.html">About</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <form class="header-search" role="search" action="pages/product/category.html" method="get">
+                    <input type="search" name="q" placeholder="Search fashion & accessories..." aria-label="Search products">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="header-icons">
+                    <a href="pages/auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="pages/account/favorites.html" aria-label="Favorites" class="header-fav-link"><i class="fas fa-heart"></i><span class="fav-badge" style="display:none;"></span></a>
+                    <a href="pages/cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
+                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="pages/product/category.html">Shop</a></li>
+                <li><a href="pages/account/blog.html">Blog</a></li>
+                <li><a href="pages/account/about.html">About</a></li>
+                <li><a href="pages/account/favorites.html">Favorites</a></li>
+                <li><a href="pages/auth/login.html">Login</a></li>
+                <li><a href="pages/auth/signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-tag">Spring / Summer 2026</span>
+                <h1>Elevate Your Style with <em>High Grand</em></h1>
+                <p>Premium fashion wear and accessories crafted for the modern wardrobe. Discover curated collections for every occasion.</p>
+                <div class="hero-actions">
+                    <a href="pages/product/category.html" class="btn btn-primary">Shop Collection</a>
+                    <a href="pages/auth/signup.html" class="btn btn-outline">Create Account</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card hero-card-main">
+                    <img src="assets/images/womenwear.jpg" alt="Women's fashion collection">
+                    <div class="hero-card-label">Women's Wear</div>
+                </div>
+                <div class="hero-card hero-card-side">
+                    <img src="assets/images/menwear.jpg" alt="Men's fashion collection">
+                    <div class="hero-card-label">Men's Wear</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories section">
+            <div class="section-header">
+                <span class="section-label">Browse by Category</span>
+                <h2>Shop Fashion & Accessories</h2>
+                <p>Filter by category to find exactly what you're looking for.</p>
+            </div>
+            <div class="category-grid">
+                <!-- Dynamically loaded from /api/categories -->
+            </div>
+        </section>
+
+        <section class="promo-banner">
+            <div class="promo-inner">
+                <div class="promo-text">
+                    <span class="section-label">New Arrivals</span>
+                    <h2>The Latest Collection</h2>
+                    <p>Trend-forward pieces in premium fabrics — limited stock available.</p>
+                    <a href="pages/product/category.html" class="btn btn-light">View New In</a>
+                </div>
+                <div class="promo-images">
+                    <img src="assets/images/download.jpg" alt="New fashion arrivals">
+                    <img src="assets/images/24007b9b-63af-449d-b4d9-bcd0dd06aafb_1024.jpeg" alt="Seasonal style">
+                </div>
+            </div>
+        </section>
+
+        <section class="featured section">
+            <div class="section-header">
+                <span class="section-label">Recommended for You</span>
+                <h2>Featured Products</h2>
+                <p>Hand-picked fashion wear and accessories from our latest inventory.</p>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-chip active" data-filter="all">All</button>
+            </div>
+
+            <div class="product-grid">
+                <!-- Dynamically loaded from /api/products -->
+            </div>
+
+            <div class="section-cta">
+                <a href="pages/product/category.html" class="btn btn-primary">View All Products</a>
+            </div>
+        </section>
+
+        <section class="features section">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-shield-halved"></i>
+                    <h3>Secure Shopping</h3>
+                    <p>Safe registration, login, and protected checkout experience.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-truck-fast"></i>
+                    <h3>Order Tracking</h3>
+                    <p>Track your orders and stay updated on every delivery step.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <h3>Email Updates</h3>
+                    <p>Get order confirmations and alerts directly to your inbox.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-screen"></i>
+                    <h3>Shop Anywhere</h3>
+                    <p>Responsive design optimized for desktop, tablet, and mobile.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter section">
+            <div class="newsletter-inner">
+                <div class="newsletter-text">
+                    <span class="section-label">Stay in Style</span>
+                    <h2>Join the High Grand Newsletter</h2>
+                    <p>Be the first to know about new collections, exclusive offers, and fashion trends.</p>
+                </div>
+                <form class="newsletter-form" action="#" method="post">
+                    <input type="email" name="email" placeholder="Enter your email address" required aria-label="Email address">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>HIGH GRAND</h3>
+                <p class="tagline">Own Your Version</p>
+                <p class="footer-desc">Premium fashion wear and accessories for the modern lifestyle. Quality, style, and confidence in every piece.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="pages/product/category.html">Shop</a></li>
+                    <li><a href="pages/account/about.html">About Us</a></li>
+                    <li><a href="pages/account/blog.html">Fashion Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="pages/auth/login.html">My Account</a></li>
+                    <li><a href="pages/order/list.html">Order History</a></li>
+                    <li><a href="pages/cart/cart.html">Shopping Cart</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +977 980-1234567</p>
+                <p><i class="fas fa-envelope"></i> support@highgrand.com</p>
+                <p><i class="fas fa-location-dot"></i> Kathmandu, Nepal</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved. | Smart E-Commerce Management System</p>
+        </div>
+    </footer>
+
+    <script src="js/home.js"></script>
+</body>
+
+</html>
