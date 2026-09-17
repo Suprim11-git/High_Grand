@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 
-<body>
+<body data-page="orders">
 
     <div class="announcement-bar">
         <p>High Grand Admin &nbsp;|&nbsp; Smart E-Commerce Management</p>
@@ -51,9 +51,8 @@
                 </div>
             </header>
 
-            <!-- Filter Tabs & Search Toolbar -->
             <div class="filter-bar">
-                <div class="tab-group">
+                <div class="tab-group" id="orderTabGroup">
                     <button type="button" class="tab-btn active" data-filter="all">All Orders</button>
                     <button type="button" class="tab-btn" data-filter="pending">Pending</button>
                     <button type="button" class="tab-btn" data-filter="processing">Processing</button>
@@ -63,12 +62,11 @@
                 </div>
 
                 <label class="search-field" style="max-width: 320px;">
-                    <input type="search" placeholder="Search order ID, customer, email..." aria-label="Search orders">
+                    <input type="search" id="orderSearch" placeholder="Search order ID, customer, email..." aria-label="Search orders">
                     <span><i class="fas fa-search"></i></span>
                 </label>
             </div>
 
-            <!-- Orders Table -->
             <div class="table-wrap">
                 <table>
                     <thead>
@@ -83,132 +81,18 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr data-status="processing">
-                            <td><strong>#HG-8942</strong></td>
-                            <td>
-                                <div>Eleanor Vance</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">eleanor.v@example.com</div>
-                            </td>
-                            <td>Sep 05, 2026 &bull; 10:24 AM</td>
-                            <td>2 items</td>
-                            <td><span class="badge badge-success">Paid</span></td>
-                            <td><span class="badge badge-warning">Processing</span></td>
-                            <td><strong>Rs. 24,500</strong></td>
-                            <td>
-                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
-                            </td>
-                        </tr>
-
-                        <tr data-status="shipped">
-                            <td><strong>#HG-8941</strong></td>
-                            <td>
-                                <div>Julian Sterling</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">julian@sterling.com</div>
-                            </td>
-                            <td>Sep 04, 2026 &bull; 03:15 PM</td>
-                            <td>1 item</td>
-                            <td><span class="badge badge-success">Paid</span></td>
-                            <td><span class="badge badge-info">Shipped</span></td>
-                            <td><strong>Rs. 18,200</strong></td>
-                            <td>
-                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
-                            </td>
-                        </tr>
-
-                        <tr data-status="delivered">
-                            <td><strong>#HG-8940</strong></td>
-                            <td>
-                                <div>Sophia Laurent</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">sophia.l@lux.com</div>
-                            </td>
-                            <td>Sep 03, 2026 &bull; 11:42 AM</td>
-                            <td>3 items</td>
-                            <td><span class="badge badge-success">Paid</span></td>
-                            <td><span class="badge badge-success">Delivered</span></td>
-                            <td><strong>Rs. 42,000</strong></td>
-                            <td>
-                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
-                            </td>
-                        </tr>
-
-                        <tr data-status="delivered">
-                            <td><strong>#HG-8939</strong></td>
-                            <td>
-                                <div>Marcus Croft</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">m.croft@domain.co</div>
-                            </td>
-                            <td>Sep 02, 2026 &bull; 04:50 PM</td>
-                            <td>1 item</td>
-                            <td><span class="badge badge-success">Paid</span></td>
-                            <td><span class="badge badge-success">Delivered</span></td>
-                            <td><strong>Rs. 9,500</strong></td>
-                            <td>
-                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
-                            </td>
-                        </tr>
-
-                        <tr data-status="cancelled">
-                            <td><strong>#HG-8938</strong></td>
-                            <td>
-                                <div>Claire Montgomery</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">claire.m@artisan.org</div>
-                            </td>
-                            <td>Sep 01, 2026 &bull; 01:10 PM</td>
-                            <td>1 item</td>
-                            <td><span class="badge badge-danger">Refunded</span></td>
-                            <td><span class="badge badge-danger">Cancelled</span></td>
-                            <td><strong>Rs. 15,400</strong></td>
-                            <td>
-                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
-                            </td>
-                        </tr>
-
-                        <tr data-status="delivered">
-                            <td><strong>#HG-8937</strong></td>
-                            <td>
-                                <div>Liam Gallagher</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">liam.g@gmail.com</div>
-                            </td>
-                            <td>Aug 31, 2026 &bull; 09:20 AM</td>
-                            <td>2 items</td>
-                            <td><span class="badge badge-success">Paid</span></td>
-                            <td><span class="badge badge-success">Delivered</span></td>
-                            <td><strong>Rs. 32,500</strong></td>
-                            <td>
-                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
-                            </td>
-                        </tr>
-
-                        <tr data-status="pending">
-                            <td><strong>#HG-8936</strong></td>
-                            <td>
-                                <div>Amelia Hayes</div>
-                                <div style="font-size: 0.75rem; color: var(--color-text-muted);">amelia.hayes@outlook.com</div>
-                            </td>
-                            <td>Aug 30, 2026 &bull; 02:45 PM</td>
-                            <td>1 item</td>
-                            <td><span class="badge badge-warning">Pending</span></td>
-                            <td><span class="badge badge-warning">Pending</span></td>
-                            <td><strong>Rs. 8,900</strong></td>
-                            <td>
-                                <a href="order_details.html" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i> View</a>
+                    <tbody id="ordersTableBody">
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
+                                <i class="fas fa-spinner fa-spin"></i> Loading orders…
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <!-- Pagination -->
             <div class="pagination">
-                <div>Showing 1 to 7 of 142 orders</div>
-                <div class="page-numbers">
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <span>...</span>
-                    <a href="#">18</a>
-                </div>
+                <div id="orderCountText">Loading orders…</div>
             </div>
         </main>
     </div>

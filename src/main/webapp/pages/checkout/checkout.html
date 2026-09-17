@@ -59,25 +59,25 @@
         </section>
 
         <div class="page-wrap checkout-layout">
-            <form class="table-card" action="../order/list.html" method="get">
+            <form class="table-card" action="../order/list.html" method="get" id="checkoutForm">
                 <h2 style="font-family:var(--font-display);margin-bottom:1.25rem;">Shipping Information</h2>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="fullname">Full name</label>
-                        <input type="text" id="fullname" name="fullname" required>
+                        <input type="text" id="fullname" name="fullname" required placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <input type="tel" id="phone" name="phone" required placeholder="+977 9800000000">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required placeholder="john@example.com">
                 </div>
                 <div class="form-group">
                     <label for="address">Street address</label>
-                    <input type="text" id="address" name="address" required>
+                    <input type="text" id="address" name="address" required placeholder="123 Main Street">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -86,7 +86,38 @@
                     </div>
                     <div class="form-group">
                         <label for="postal">Postal code</label>
-                        <input type="text" id="postal" name="postal">
+                        <input type="text" id="postal" name="postal" placeholder="44600">
+                    </div>
+                </div>
+
+                <!-- Dedicated Map Integration Space (For Later Process) -->
+                <div class="map-integration-container" id="checkout-map-space">
+                    <div class="map-header-bar">
+                        <h3><i class="fas fa-map-marked-alt" style="color: var(--color-gold, #b8956a);"></i> Delivery Location (Map)</h3>
+                        <span class="map-badge"><i class="fas fa-location-dot"></i> Map Integration Ready</span>
+                    </div>
+                    <p style="font-size:0.83rem; color: var(--color-text-muted, #666); margin-bottom: 0.75rem;">
+                        Pin your delivery address on the interactive map space for precise delivery tracking.
+                    </p>
+                    <div class="map-viewport-placeholder">
+                        <div class="map-grid-pattern"></div>
+                        <div class="map-pin-pulse">
+                            <i class="fas fa-location-dot"></i>
+                            <div class="map-pin-shadow"></div>
+                        </div>
+                        <div class="map-instructions">
+                            <i class="fas fa-info-circle"></i> Map canvas space ready for Google Maps / Leaflet integration
+                        </div>
+                    </div>
+                    <div class="map-coords-row">
+                        <div>
+                            <label for="latitude">Latitude</label>
+                            <input type="text" id="latitude" name="latitude" value="27.7172° N" readonly style="font-size:0.85rem; background:#f4f4f4; color:#555;">
+                        </div>
+                        <div>
+                            <label for="longitude">Longitude</label>
+                            <input type="text" id="longitude" name="longitude" value="85.3240° E" readonly style="font-size:0.85rem; background:#f4f4f4; color:#555;">
+                        </div>
                     </div>
                 </div>
 
@@ -101,17 +132,28 @@
                 </div>
                 <div class="form-group">
                     <label for="notes">Order notes (optional)</label>
-                    <textarea id="notes" name="notes" rows="3" placeholder="Delivery instructions"></textarea>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Special delivery instructions or landmark notes"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Place Order</button>
+                <button type="submit" class="btn btn-primary" id="placeOrderBtn">Place Order</button>
             </form>
 
             <aside class="summary-card">
                 <h2>Order Summary</h2>
-                <div class="summary-row"><span>Silk Blend Midi Dress</span><span>$89.99</span></div>
-                <div class="summary-row"><span>Leather Chelsea Boots</span><span>$129.99</span></div>
-                <div class="summary-row"><span>Shipping</span><span>Free</span></div>
-                <div class="summary-row total"><span>Total</span><span>$219.98</span></div>
+                <div id="checkoutItemsList" class="checkout-items-list">
+                    <!-- Dynamic product items loaded by script below -->
+                </div>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="checkoutSubtotal">Rs. 0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="checkoutShipping">Free</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="checkoutTotal">Rs. 0</span>
+                </div>
             </aside>
         </div>
     </main>
@@ -123,6 +165,141 @@
     </footer>
 
     <script src="../../js/home.js"></script>
+    <script>
+        (function () {
+            'use strict';
+
+            const CART_KEY = 'highgrand_cart';
+
+            function money(val) {
+                return 'Rs. ' + Number(val || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            }
+
+            function escapeHtml(str) {
+                return String(str || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function getProductImage(product) {
+                if (product.hasImage || product.image) {
+                    if (product.image && product.image.startsWith('/')) return product.image;
+                    if (product.hasImage) return '/api/products/' + product.id + '/image';
+                    return product.image;
+                }
+                return '../../assets/images/logo.png';
+            }
+
+            async function initializeCheckoutSummary() {
+                const itemsContainer = document.getElementById('checkoutItemsList');
+                const subtotalEl = document.getElementById('checkoutSubtotal');
+                const shippingEl = document.getElementById('checkoutShipping');
+                const totalEl = document.getElementById('checkoutTotal');
+                const placeOrderBtn = document.getElementById('placeOrderBtn');
+
+                if (!itemsContainer) return;
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const buyNowId = urlParams.get('buyNow') || urlParams.get('productId');
+                const qtyParam = Math.max(1, parseInt(urlParams.get('qty') || '1', 10));
+
+                let selectedProducts = [];
+
+                // 1. Check if direct Buy Now parameter is present
+                if (buyNowId) {
+                    try {
+                        const res = await fetch('/api/products/' + buyNowId);
+                        if (res.ok) {
+                            const p = await res.json();
+                            selectedProducts.push({
+                                id: p.id,
+                                name: p.name,
+                                price: Number(p.price || 0),
+                                image: getProductImage(p),
+                                quantity: qtyParam
+                            });
+                        }
+                    } catch (err) {
+                        console.error('Error fetching buyNow product:', err);
+                    }
+                }
+
+                // 2. If no direct Buy Now item found, read from localStorage cart
+                if (selectedProducts.length === 0) {
+                    try {
+                        const rawCart = localStorage.getItem(CART_KEY);
+                        if (rawCart) {
+                            selectedProducts = JSON.parse(rawCart) || [];
+                        }
+                    } catch (e) {
+                        console.error('Error reading cart for checkout:', e);
+                    }
+                }
+
+                // Empty state handling
+                if (!selectedProducts || selectedProducts.length === 0) {
+                    itemsContainer.innerHTML = `
+                        <div style="padding: 1.5rem 0; text-align: center; color: var(--color-text-muted);">
+                            <i class="fas fa-shopping-bag" style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i>
+                            <p style="font-size: 0.9rem;">No product selected for checkout.</p>
+                            <a href="../product/category.html" class="btn btn-primary" style="margin-top: 0.75rem; display: inline-block; font-size: 0.8rem; padding: 0.5rem 1rem;">
+                                Browse Products
+                            </a>
+                        </div>
+                    `;
+                    if (subtotalEl) subtotalEl.textContent = money(0);
+                    if (shippingEl) shippingEl.textContent = 'Free';
+                    if (totalEl) totalEl.textContent = money(0);
+                    if (placeOrderBtn) {
+                        placeOrderBtn.disabled = true;
+                        placeOrderBtn.style.opacity = '0.5';
+                        placeOrderBtn.style.cursor = 'not-allowed';
+                    }
+                    return;
+                }
+
+                // Render items
+                let subtotal = 0;
+                itemsContainer.innerHTML = selectedProducts.map(function (item) {
+                    const price = Number(item.price || 0);
+                    const qty = Number(item.quantity || 1);
+                    const itemTotal = price * qty;
+                    subtotal += itemTotal;
+
+                    const imgSrc = item.image ? escapeHtml(item.image) : '../../assets/images/logo.png';
+
+                    return `
+                        <div class="checkout-product-item">
+                            <img src="${imgSrc}" alt="${escapeHtml(item.name)}" class="checkout-product-img" onerror="this.onerror=null;this.src='../../assets/images/logo.png';">
+                            <div class="checkout-product-details">
+                                <h4 class="checkout-product-name">${escapeHtml(item.name)}</h4>
+                                <div class="checkout-product-meta">${money(price)} × ${qty}</div>
+                            </div>
+                            <div class="checkout-product-price">${money(itemTotal)}</div>
+                        </div>
+                    `;
+                }).join('');
+
+                const shipping = 0; // Free shipping
+                const grandTotal = subtotal + shipping;
+
+                if (subtotalEl) subtotalEl.textContent = money(subtotal);
+                if (shippingEl) shippingEl.textContent = 'Free';
+                if (totalEl) totalEl.textContent = money(grandTotal);
+
+                if (placeOrderBtn) {
+                    placeOrderBtn.disabled = false;
+                    placeOrderBtn.style.opacity = '1';
+                    placeOrderBtn.style.cursor = 'pointer';
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', initializeCheckoutSummary);
+        })();
+    </script>
 </body>
 
 </html>

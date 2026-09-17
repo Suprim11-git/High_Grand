@@ -29,382 +29,112 @@
 
 <div class="admin-shell">
 
-    <!-- =====================================================
-         SIDEBAR
-         ===================================================== -->
-
     <aside class="sidebar">
-
         <a href="dashboard.html" class="sidebar-brand">
-
-            <img src="../assets/images/logo.png"
-                 alt="High Grand logo">
-
+            <img src="../assets/images/logo.png" alt="High Grand logo">
             <span class="brand-name">HIGH GRAND</span>
-
         </a>
-
         <span class="sidebar-label">Admin Panel</span>
 
-
         <nav aria-label="Admin navigation">
-
-            <a href="dashboard.html">
-                <i class="fas fa-chart-line"></i>
-                Dashboard
-            </a>
-
-            <a href="products.html">
-                <i class="fas fa-bag-shopping"></i>
-                Products
-            </a>
-
-            <a href="categories.html">
-                <i class="fas fa-layer-group"></i>
-                Categories
-            </a>
-
-            <a href="orders.html">
-                <i class="fas fa-receipt"></i>
-                Orders
-            </a>
-
-            <a href="inventory.html">
-                <i class="fas fa-boxes-stacked"></i>
-                Inventory
-            </a>
-
-            <a href="users.html" class="active">
-                <i class="fas fa-users"></i>
-                Users
-            </a>
-
+            <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+            <a href="categories.html"><i class="fas fa-layer-group"></i> Categories</a>
+            <a href="orders.html"><i class="fas fa-receipt"></i> Orders</a>
+            <a href="inventory.html"><i class="fas fa-boxes-stacked"></i> Inventory</a>
+            <a href="users.html" class="active"><i class="fas fa-users"></i> Users</a>
         </nav>
 
-
         <div class="sidebar-footer">
-
-            <a href="../Home.html">
-                <i class="fas fa-store"></i>
-                View storefront
-            </a>
-
+            <a href="../Home.html"><i class="fas fa-store"></i> View storefront</a>
         </div>
-
     </aside>
 
-
-    <!-- =====================================================
-         MAIN CONTENT
-         ===================================================== -->
-
     <main class="main-content">
-
-
-        <!-- =================================================
-             PAGE HEADER
-             ================================================= -->
-
         <header class="page-header">
-
             <div>
-
                 <h1>Customer & User Accounts</h1>
-
-                <p>
-                    Manage client memberships, store permissions,
-                    order histories, and communications.
-                </p>
-
+                <p>Manage client memberships, store permissions, order histories, and communications.</p>
             </div>
-
 
             <div class="header-actions">
-
-                <button type="button"
-                        class="btn btn-primary"
-                        id="newUserBtn">
-
-                    <i class="fas fa-user-plus"></i>
-                    New User
-
+                <button type="button" class="btn btn-primary" id="newUserBtn">
+                    <i class="fas fa-user-plus"></i> New User
                 </button>
-
-
-                <a href="../pages/auth/login.html"
-                   class="btn btn-outline">
-
-                    Logout
-
-                </a>
-
+                <a href="../pages/auth/login.html" class="btn btn-outline">Logout</a>
             </div>
-
         </header>
 
-
-
-        <!-- =================================================
-             METRICS CARDS
-             ================================================= -->
-
-        <section class="dashboard-cards"
-                 style="margin-bottom: 2rem;">
-
-
-            <!-- TOTAL USERS -->
-
+        <section class="dashboard-cards" style="margin-bottom: 2rem;">
             <div class="card">
-
                 <h3>Total Registered</h3>
-
-                <p id="totalUsers">
-                    0
-                </p>
-
-                <div class="card-meta">
-
-                    Registered users in High Grand
-
-                </div>
-
+                <p id="totalUsers">0</p>
+                <div class="card-meta">Registered users in High Grand</div>
             </div>
 
-
-            <!-- ACTIVE USERS -->
-
             <div class="card">
-
                 <h3>Active Users</h3>
-
-                <p id="activeUsers">
-                    0
-                </p>
-
-                <div class="card-meta">
-
-                    Currently enabled accounts
-
-                </div>
-
+                <p id="activeUsers">0</p>
+                <div class="card-meta">Currently enabled accounts</div>
             </div>
-
-
-            <!-- ADMINISTRATORS -->
 
             <div class="card">
-
                 <h3>Administrative Staff</h3>
-
-                <p id="adminUsers">
-                    0
-                </p>
-
-                <div class="card-meta">
-
-                    Users with administrator access
-
-                </div>
-
+                <p id="adminUsers">0</p>
+                <div class="card-meta">Users with administrator access</div>
             </div>
-
-
         </section>
 
-
-
-        <!-- =================================================
-             FILTERS & SEARCH
-             ================================================= -->
-
         <div class="filter-bar">
-
-
             <div class="tab-group">
-
-                <button type="button"
-                        class="tab-btn active"
-                        data-filter="all">
-
-                    All Accounts
-
-                </button>
-
-
-                <button type="button"
-                        class="tab-btn"
-                        data-filter="customer">
-
-                    Customers
-
-                </button>
-
-
-                <button type="button"
-                        class="tab-btn"
-                        data-filter="administrator">
-
-                    Administrators
-
-                </button>
-
-
-                <button type="button"
-                        class="tab-btn"
-                        data-filter="active">
-
-                    Active
-
-                </button>
-
-
-                <button type="button"
-                        class="tab-btn"
-                        data-filter="inactive">
-
-                    Inactive
-
-                </button>
-
+                <button type="button" class="tab-btn active" data-filter="all">All Accounts</button>
+                <button type="button" class="tab-btn" data-filter="customer">Customers</button>
+                <button type="button" class="tab-btn" data-filter="administrator">Administrators</button>
+                <button type="button" class="tab-btn" data-filter="active">Active</button>
+                <button type="button" class="tab-btn" data-filter="inactive">Inactive</button>
             </div>
 
-
-            <label class="search-field"
-                   style="max-width: 300px;">
-
-                <input type="search"
-                       id="userSearch"
-                       placeholder="Search by name, username, email..."
-                       aria-label="Search users">
-
-                <span>
-                    <i class="fas fa-search"></i>
-                </span>
-
+            <label class="search-field" style="max-width: 300px;">
+                <input type="search" id="userSearch" placeholder="Search by name, username, email..." aria-label="Search users">
+                <span><i class="fas fa-search"></i></span>
             </label>
-
         </div>
-
-
-
-        <!-- =================================================
-             USERS TABLE
-             ================================================= -->
 
         <div class="table-wrap">
-
             <table>
-
                 <thead>
-
-                <tr>
-
-                    <th>User Profile</th>
-
-                    <th>Username</th>
-
-                    <th>Email</th>
-
-                    <th>Role</th>
-
-                    <th>Status</th>
-
-                    <th>Actions</th>
-
-                </tr>
-
+                    <tr>
+                        <th>User Profile</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
-
-
-                <!--
-                    JavaScript will load real users here
-                    from:
-
-                    GET /admin/api/users
-                -->
-
                 <tbody id="usersTableBody">
-
-                <tr>
-
-                    <td colspan="6"
-                        style="text-align:center; padding:30px;">
-
-                        <i class="fas fa-spinner fa-spin"></i>
-
-                        Loading users...
-
-                    </td>
-
-                </tr>
-
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:30px;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading users...
+                        </td>
+                    </tr>
                 </tbody>
-
             </table>
-
         </div>
-
-
-
-        <!-- =================================================
-             PAGINATION / USER COUNT
-             ================================================= -->
 
         <div class="pagination">
-
-            <div id="userCountText">
-
-                Loading users...
-
-            </div>
-
+            <div id="userCountText">Loading users...</div>
             <div class="page-numbers">
-
-                <a href="#"
-                   class="active"
-                   id="pageOne">
-
-                    1
-
-                </a>
-
+                <a href="#" class="active" id="pageOne">1</a>
             </div>
-
         </div>
-
-
     </main>
-
 </div>
 
-
-<!-- =========================================================
-     NEW USER MESSAGE
-     ========================================================= -->
-
-<div id="newUserMessage"
-     style="
-        display:none;
-        position:fixed;
-        bottom:25px;
-        right:25px;
-        background:var(--color-accent);
-        color:#fff;
-        padding:15px 20px;
-        border-radius:8px;
-        z-index:9999;
-     ">
-
-    <i class="fas fa-info-circle"></i>
-
-    New user registration is handled from the customer
-    registration page.
-
+<div id="newUserMessage" style="display:none; position:fixed; bottom:25px; right:25px; background:var(--color-accent); color:#fff; padding:15px 20px; border-radius:8px; z-index:9999;">
+    <i class="fas fa-info-circle"></i> New user registration is handled from the customer registration page.
 </div>
-
 
 <script src="../js/admin.js"></script>
-
 </body>
-
 </html>

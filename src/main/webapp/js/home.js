@@ -93,7 +93,10 @@
     async function fetchProducts() {
         try {
             var res = await fetch('/api/products');
-            if (!res.ok) return [];
+            if (!res.ok) {
+                console.error('Failed to fetch products: HTTP ' + res.status);
+                return [];
+            }
             var prods = await res.json();
             if (Array.isArray(prods)) {
                 // Filter only Active products for storefront
@@ -103,6 +106,7 @@
             }
             return allProducts;
         } catch (e) {
+            console.error('Network or parsing error fetching products:', e);
             return [];
         }
     }
@@ -200,7 +204,7 @@
         return '<article class="product-card" data-category="' + p.categoryId + '" data-category-name="' + escapeHtml(catName.toLowerCase()) + '">' +
             '<div class="product-image">' +
             '<a href="' + detailLink + '">' +
-            '<img src="' + img + '" alt="' + escapeHtml(p.name) + '">' +
+            '<img src="' + img + '" alt="' + escapeHtml(p.name) + '" onerror="this.onerror=null;this.src=\'' + assetPrefix + 'logo.png\';">' +
             '</a>' +
             (isOnSale ? '<span class="badge badge-sale">Sale</span>' : '') +
             '<button class="wishlist-btn' + (fav ? ' active' : '') + '" type="button" aria-label="Add to wishlist" data-wishlist-id="' + p.id + '">' +
@@ -398,6 +402,19 @@
             var idInput = document.getElementById('formProductId');
             if (idInput) idInput.value = p.id;
 
+            if (buyBtn) {
+                buyBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (p.stock <= 0) {
+                        alert('This product is out of stock.');
+                        return;
+                    }
+                    var qtyInput = document.getElementById('qty');
+                    var qtyVal = qtyInput ? qtyInput.value || 1 : 1;
+                    window.location.href = '../checkout/checkout.html?buyNow=' + p.id + '&qty=' + qtyVal;
+                });
+            }
+
             // Detail page wishlist button
             var detailFavBtn = document.getElementById('detailWishlistBtn');
             if (detailFavBtn) {
@@ -495,8 +512,8 @@
         // If URL has ?category=..., match to category ID
         if (categoryParam) {
             var matchedCat = allCategories.find(function (c) {
-                return c.name.toLowerCase() === categoryParam.toLowerCase() ||
-                    c.slug.toLowerCase() === categoryParam.toLowerCase();
+                return (c.name && c.name.toLowerCase() === categoryParam.toLowerCase()) ||
+                    (c.slug && c.slug.toLowerCase() === categoryParam.toLowerCase());
             });
             if (matchedCat) {
                 currentFilter = matchedCat.id;

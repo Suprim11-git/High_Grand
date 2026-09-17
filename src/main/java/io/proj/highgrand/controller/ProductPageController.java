@@ -81,11 +81,11 @@ public class ProductPageController {
     @PostMapping("/admin/update_product")
     public String handleUpdateProduct(
             @RequestParam("id") Long id,
-            @RequestParam("productName") String productName,
-            @RequestParam("category") String category,
+            @RequestParam(value = "productName", required = false) String productName,
+            @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "sku", required = false) String sku,
             @RequestParam(value = "description", required = false) String description,
-            @RequestParam("price") BigDecimal price,
+            @RequestParam(value = "price", required = false) BigDecimal price,
             @RequestParam(value = "salePrice", required = false) BigDecimal salePrice,
             @RequestParam(value = "stock", required = false) Integer stock,
             @RequestParam(value = "minStock", required = false) Integer minStock,

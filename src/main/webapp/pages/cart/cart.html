@@ -56,43 +56,53 @@
         <section class="page-hero">
             <p class="breadcrumb"><a href="../../Home.html">Home</a> / Cart</p>
             <h1>Your Shopping Cart</h1>
-            <p>Sample cart items for layout. Quantities and totals will be calculated on the server.</p>
+            <p>Review the items in your cart before proceeding to checkout.</p>
         </section>
 
         <div class="page-wrap cart-layout">
-            <div class="table-card">
-                <div class="cart-item">
-                    <img src="../../assets/images/womenwear.jpg" alt="Silk Blend Midi Dress">
-                    <div>
-                        <h3>Silk Blend Midi Dress</h3>
-                        <p>Women's Wear · Size M</p>
-                    </div>
-                    <div>
-                        <p>$89.99</p>
-                        <label>Qty <input type="number" name="qty" value="1" min="1"></label>
-                    </div>
-                </div>
-                <div class="cart-item">
-                    <img src="../../assets/images/shoes.jpg" alt="Leather Chelsea Boots">
-                    <div>
-                        <h3>Leather Chelsea Boots</h3>
-                        <p>Footwear · Size 41</p>
-                    </div>
-                    <div>
-                        <p>$129.99</p>
-                        <label>Qty <input type="number" name="qty" value="1" min="1"></label>
-                    </div>
-                </div>
+
+            <div class="table-card" id="cartItems">
+                <!-- Cart items will be loaded by cart.js -->
             </div>
 
             <aside class="summary-card">
                 <h2>Order Summary</h2>
-                <div class="summary-row"><span>Subtotal</span><span>$219.98</span></div>
-                <div class="summary-row"><span>Shipping</span><span>Free</span></div>
-                <div class="summary-row total"><span>Total</span><span>$219.98</span></div>
-                <a href="../checkout/checkout.html" class="btn btn-primary" style="width:100%;margin-top:1.25rem;">Proceed to Checkout</a>
-                <a href="../product/category.html" class="btn btn-outline" style="width:100%;margin-top:0.75rem;">Continue Shopping</a>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="cartShipping">Free</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+
+                <a href="../checkout/checkout.html"
+                   id="checkoutBtn"
+                   class="btn btn-primary"
+                   style="width:100%;margin-top:1.25rem;">
+                    Proceed to Checkout
+                </a>
+
+                <button id="clearCartBtn"
+                        class="btn btn-outline"
+                        style="width:100%;margin-top:0.75rem;">
+                    Clear Cart
+                </button>
+
+                <a href="../product/category.html"
+                   class="btn btn-outline"
+                   style="width:100%;margin-top:0.75rem;">
+                    Continue Shopping
+                </a>
             </aside>
+
         </div>
     </main>
 
@@ -103,6 +113,529 @@
     </footer>
 
     <script src="../../js/home.js"></script>
+    <script>
+        (function () {
+            "use strict";
+
+            const CART_KEY = "highgrand_cart";
+
+            // =========================
+            // CART STORAGE
+            // =========================
+
+            function getCart() {
+                try {
+                    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+                } catch (error) {
+                    console.error("Could not read cart:", error);
+                    return [];
+                }
+            }
+
+            function saveCart(cart) {
+                localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            }
+
+            // =========================
+            // HELPERS
+            // =========================
+
+            function money(value) {
+                return "Rs. " + Number(value || 0).toLocaleString("en-IN", {
+                    maximumFractionDigits: 0
+                });
+            }
+
+            function escapeHtml(value) {
+                return String(value ?? "")
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            function getProductImage(product) {
+                if (product.hasImage) {
+                    return "/api/products/" + product.id + "/image";
+                }
+
+                return "../../assets/images/logo.png";
+            }
+
+            // =========================
+            // UPDATE CART COUNT
+            // =========================
+
+            function updateCartCount() {
+                const cart = getCart();
+
+                const count = cart.reduce(function (total, item) {
+                    return total + Number(item.quantity || 0);
+                }, 0);
+
+                // Supports any cart-count elements already in your project
+                document.querySelectorAll(
+                    "[data-cart-count], .cart-count, .cart-badge"
+                ).forEach(function (element) {
+                    element.textContent = count;
+                });
+            }
+
+            // =========================
+            // ADD PRODUCT FROM URL
+            // =========================
+
+            async function addProductFromUrl() {
+
+                const params = new URLSearchParams(window.location.search);
+                const productId = params.get("added");
+
+                if (!productId) {
+                    return;
+                }
+
+                if (!/^\d+$/.test(productId)) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(
+                        "/api/products/" + productId
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Product could not be loaded.");
+                    }
+
+                    const product = await response.json();
+
+                    // Don't add inactive products
+                    if (
+                        product.status &&
+                        product.status.toUpperCase() !== "ACTIVE"
+                    ) {
+                        alert("This product is currently unavailable.");
+                        return;
+                    }
+
+                    // Don't add products with no stock
+                    if (
+                        product.stock !== undefined &&
+                        Number(product.stock) <= 0
+                    ) {
+                        alert("This product is out of stock.");
+                        return;
+                    }
+
+                    const cart = getCart();
+
+                    const existingItem = cart.find(function (item) {
+                        return Number(item.id) === Number(product.id);
+                    });
+
+                    if (existingItem) {
+
+                        const currentStock =
+                            product.stock !== undefined
+                                ? Number(product.stock)
+                                : 999999;
+
+                        if (existingItem.quantity < currentStock) {
+                            existingItem.quantity += 1;
+                        } else {
+                            alert("You cannot add more than the available stock.");
+                        }
+
+                    } else {
+
+                        cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: Number(product.price || 0),
+                            originalPrice: Number(product.originalPrice || 0),
+                            image: getProductImage(product),
+                            stock:
+                                product.stock !== undefined
+                                    ? Number(product.stock)
+                                    : 999999,
+                            categoryId: product.categoryId || null,
+                            quantity: 1
+                        });
+                    }
+
+                    saveCart(cart);
+
+                    // Remove ?added=ID from the URL
+                    // so refreshing the page does not add the product again.
+                    const cleanUrl =
+                        window.location.pathname +
+                        window.location.search.replace(
+                            /([?&])added=\d+(&|$)/,
+                            function (match, separator, ending) {
+                                if (separator === "?" && ending === "&") {
+                                    return "?";
+                                }
+                                return "";
+                            }
+                        );
+
+                    window.history.replaceState(
+                        {},
+                        document.title,
+                        cleanUrl.replace(/[?&]$/, "")
+                    );
+
+                } catch (error) {
+                    console.error("Error adding product:", error);
+                    alert("Unable to add the product to cart.");
+                }
+            }
+
+            // =========================
+            // RENDER CART
+            // =========================
+
+            function renderCart() {
+
+                const cartContainer =
+                    document.getElementById("cartItems");
+
+                const subtotalElement =
+                    document.getElementById("cartSubtotal");
+
+                const shippingElement =
+                    document.getElementById("cartShipping");
+
+                const totalElement =
+                    document.getElementById("cartTotal");
+
+                const checkoutButton =
+                    document.getElementById("checkoutBtn");
+
+                if (!cartContainer) {
+                    return;
+                }
+
+                const cart = getCart();
+
+                // Empty cart
+                if (cart.length === 0) {
+
+                    cartContainer.innerHTML = `
+                <div style="padding: 3rem; text-align: center;">
+                    <h2>Your cart is empty</h2>
+                    <p style="margin: 1rem 0;">
+                        Add some products to your cart to continue shopping.
+                    </p>
+
+                    <a href="../product/category.html"
+                       class="btn btn-primary">
+                        Continue Shopping
+                    </a>
+                </div>
+            `;
+
+                    if (subtotalElement) {
+                        subtotalElement.textContent = money(0);
+                    }
+
+                    if (shippingElement) {
+                        shippingElement.textContent = "Free";
+                    }
+
+                    if (totalElement) {
+                        totalElement.textContent = money(0);
+                    }
+
+                    if (checkoutButton) {
+                        checkoutButton.style.pointerEvents = "none";
+                        checkoutButton.style.opacity = "0.5";
+                        checkoutButton.setAttribute("aria-disabled", "true");
+                    }
+
+                    updateCartCount();
+                    return;
+                }
+
+                // Enable checkout
+                if (checkoutButton) {
+                    checkoutButton.style.pointerEvents = "auto";
+                    checkoutButton.style.opacity = "1";
+                    checkoutButton.removeAttribute("aria-disabled");
+                }
+
+                let subtotal = 0;
+
+                cartContainer.innerHTML = cart.map(function (item) {
+
+                    const price = Number(item.price || 0);
+                    const quantity = Number(item.quantity || 1);
+                    const itemTotal = price * quantity;
+
+                    subtotal += itemTotal;
+
+                    return `
+                <div class="cart-item"
+                     data-product-id="${item.id}"
+                     style="
+                        display:flex;
+                        align-items:center;
+                        gap:1rem;
+                        padding:1.25rem;
+                        border-bottom:1px solid #ddd;
+                     ">
+
+                    <img
+                        src="${escapeHtml(item.image)}"
+                        alt="${escapeHtml(item.name)}"
+                        style="
+                            width:100px;
+                            height:120px;
+                            object-fit:cover;
+                            border-radius:8px;
+                        "
+                        onerror="this.src='../../assets/images/logo.png'"
+                    >
+
+                    <div style="flex:1;">
+
+                        <h3>
+                            ${escapeHtml(item.name)}
+                        </h3>
+
+                        <p style="margin:0.5rem 0;">
+                            ${money(price)}
+                        </p>
+
+                        <div style="
+                            display:flex;
+                            align-items:center;
+                            gap:0.5rem;
+                        ">
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                                data-action="decrease"
+                                data-id="${item.id}">
+                                −
+                            </button>
+
+                            <span
+                                style="
+                                    min-width:30px;
+                                    text-align:center;
+                                ">
+                                ${quantity}
+                            </span>
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                                data-action="increase"
+                                data-id="${item.id}">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div style="
+                        text-align:right;
+                        min-width:120px;
+                    ">
+
+                        <strong>
+                            ${money(itemTotal)}
+                        </strong>
+
+                        <br>
+
+                        <button
+                            type="button"
+                            class="remove-cart-item"
+                            data-id="${item.id}"
+                            style="
+                                margin-top:0.75rem;
+                                border:none;
+                                background:none;
+                                cursor:pointer;
+                            ">
+                            Remove
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+
+                }).join("");
+
+                // Shipping
+                const shipping = 0;
+
+                const total = subtotal + shipping;
+
+                if (subtotalElement) {
+                    subtotalElement.textContent = money(subtotal);
+                }
+
+                if (shippingElement) {
+                    shippingElement.textContent = "Free";
+                }
+
+                if (totalElement) {
+                    totalElement.textContent = money(total);
+                }
+
+                updateCartCount();
+            }
+
+            // =========================
+            // QUANTITY + / -
+            // =========================
+
+            document.addEventListener("click", function (event) {
+
+                const quantityButton =
+                    event.target.closest(".quantity-btn");
+
+                if (quantityButton) {
+
+                    const productId =
+                        Number(quantityButton.dataset.id);
+
+                    const action =
+                        quantityButton.dataset.action;
+
+                    const cart = getCart();
+
+                    const item =
+                        cart.find(function (cartItem) {
+                            return Number(cartItem.id) === productId;
+                        });
+
+                    if (!item) {
+                        return;
+                    }
+
+                    if (action === "increase") {
+
+                        const stock =
+                            Number(item.stock || 999999);
+
+                        if (item.quantity < stock) {
+                            item.quantity += 1;
+                        } else {
+                            alert("You have reached the available stock.");
+                        }
+
+                    }
+
+                    if (action === "decrease") {
+
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                        }
+                    }
+
+                    saveCart(cart);
+                    renderCart();
+                    return;
+                }
+
+                // =========================
+                // REMOVE ITEM
+                // =========================
+
+                const removeButton =
+                    event.target.closest(".remove-cart-item");
+
+                if (removeButton) {
+
+                    const productId =
+                        Number(removeButton.dataset.id);
+
+                    let cart = getCart();
+
+                    cart = cart.filter(function (item) {
+                        return Number(item.id) !== productId;
+                    });
+
+                    saveCart(cart);
+                    renderCart();
+                }
+            });
+
+            // =========================
+            // CLEAR CART
+            // =========================
+
+            const clearCartButton =
+                document.getElementById("clearCartBtn");
+
+            if (clearCartButton) {
+
+                clearCartButton.addEventListener("click", function () {
+
+                    const cart = getCart();
+
+                    if (cart.length === 0) {
+                        return;
+                    }
+
+                    const confirmClear =
+                        confirm("Are you sure you want to clear your cart?");
+
+                    if (!confirmClear) {
+                        return;
+                    }
+
+                    localStorage.removeItem(CART_KEY);
+
+                    renderCart();
+                });
+            }
+
+            // =========================
+            // CHECKOUT PROTECTION
+            // =========================
+
+            const checkoutButton =
+                document.getElementById("checkoutBtn");
+
+            if (checkoutButton) {
+
+                checkoutButton.addEventListener("click", function (event) {
+
+                    const cart = getCart();
+
+                    if (cart.length === 0) {
+                        event.preventDefault();
+                        alert("Your cart is empty.");
+                    }
+                });
+            }
+
+            // =========================
+            // START CART
+            // =========================
+
+            async function initializeCart() {
+
+                await addProductFromUrl();
+
+                renderCart();
+
+                updateCartCount();
+            }
+
+            initializeCart();
+
+        })();
+    </script>
 </body>
 
 </html>

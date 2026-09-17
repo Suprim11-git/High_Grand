@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 
-<body>
+<body data-page="order-details">
 
     <div class="announcement-bar">
         <p>High Grand Admin &nbsp;|&nbsp; Smart E-Commerce Management</p>
@@ -44,11 +44,11 @@
             <header class="page-header">
                 <div>
                     <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.3rem;">
-                        <h1>Order #HG-8942</h1>
-                        <span class="badge badge-warning">Processing</span>
-                        <span class="badge badge-success">Paid</span>
+                        <h1 id="orderDetailHeading">Order Details</h1>
+                        <span class="badge badge-warning" id="orderStatusBadge">Processing</span>
+                        <span class="badge badge-success" id="orderPaymentBadge">Paid</span>
                     </div>
-                    <p>Placed on September 05, 2026 at 10:24 AM &bull; Customer: Eleanor Vance</p>
+                    <p id="orderPlacedSub">Loading order details…</p>
                 </div>
                 <div class="header-actions">
                     <a href="orders.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to Orders</a>
@@ -57,11 +57,9 @@
             </header>
 
             <div class="grid-2">
-                <!-- Left: Items & Financials -->
                 <div>
-                    <!-- Items Ordered -->
                     <div class="detail-card">
-                        <h3><span>Purchased Items</span> <span style="font-size: 0.85rem; color: var(--color-text-muted);">2 Items</span></h3>
+                        <h3><span>Purchased Items</span> <span style="font-size: 0.85rem; color: var(--color-text-muted);" id="orderItemCountText">Items</span></h3>
                         
                         <div class="table-wrap" style="box-shadow: none; border: 1px solid var(--color-border);">
                             <table>
@@ -73,168 +71,107 @@
                                         <th>Total</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="orderItemsTableBody">
                                     <tr>
-                                        <td>
-                                            <div class="product-cell">
-                                                <img src="../assets/images/shoes.jpg" alt="High Grand Oxford Classic">
-                                                <div>
-                                                    <div style="font-weight: 600;">High Grand Oxford Classic</div>
-                                                    <div style="font-size: 0.75rem; color: var(--color-text-muted);">Size: 42 &bull; SKU: HG-SH-001</div>
-                                                </div>
-                                            </div>
+                                        <td colspan="4" style="text-align:center; padding: 2rem; color: var(--color-text-muted);">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading purchased items…
                                         </td>
-                                        <td>Rs. 14,500</td>
-                                        <td>1</td>
-                                        <td><strong>Rs. 14,500</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="product-cell">
-                                                <img src="../assets/images/perfume.jpg" alt="Grand Noir Eau De Parfum">
-                                                <div>
-                                                    <div style="font-weight: 600;">Grand Noir Eau De Parfum</div>
-                                                    <div style="font-size: 0.75rem; color: var(--color-text-muted);">Volume: 100ml &bull; SKU: HG-BT-401</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Rs. 8,900</td>
-                                        <td>1</td>
-                                        <td><strong>Rs. 8,900</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <!-- Financial Summary -->
                         <div style="margin-top: 1.5rem; padding: 1rem; background: var(--color-bg); border-radius: var(--radius);">
                             <div class="order-summary-row">
                                 <span>Subtotal</span>
-                                <span>Rs. 23,400</span>
+                                <span id="orderSubtotal">Rs. 0</span>
                             </div>
                             <div class="order-summary-row">
                                 <span>Estimated Tax (13%)</span>
-                                <span>Rs. 0 (Included)</span>
+                                <span id="orderTax">Rs. 0</span>
                             </div>
                             <div class="order-summary-row">
                                 <span>Express Courier Delivery</span>
-                                <span>Rs. 1,100</span>
-                            </div>
-                            <div class="order-summary-row">
-                                <span>Luxury Gift Packaging</span>
-                                <span style="color: var(--color-new); font-weight: 600;">Complimentary</span>
+                                <span id="orderShipping">Rs. 0</span>
                             </div>
                             <div class="order-summary-row total">
                                 <span>Grand Total</span>
-                                <span style="color: var(--color-gold);">Rs. 24,500</span>
+                                <span style="color: var(--color-gold);" id="orderTotal">Rs. 0</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Order Timeline -->
                     <div class="detail-card">
                         <h3>Order Fulfillment Timeline</h3>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-point"></div>
-                                <div class="timeline-title">Order Received</div>
-                                <div class="timeline-date">Sep 05, 2026 &bull; 10:24 AM via Online Checkout</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-point"></div>
-                                <div class="timeline-title">Payment Confirmed</div>
-                                <div class="timeline-date">Sep 05, 2026 &bull; 10:25 AM &bull; Mastercard (auth #TXN-88401928)</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-point"></div>
-                                <div class="timeline-title">Packaging & Quality Assurance</div>
-                                <div class="timeline-date">Sep 05, 2026 &bull; 11:15 AM &bull; High Grand Central Warehouse</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-point pending"></div>
-                                <div class="timeline-title" style="color: var(--color-text-muted);">Dispatched with Courier</div>
-                                <div class="timeline-date">Pending courier pickup</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-point pending"></div>
-                                <div class="timeline-title" style="color: var(--color-text-muted);">Delivered to Customer</div>
-                                <div class="timeline-date">Expected by Sep 07, 2026</div>
-                            </div>
+                        <div class="timeline" id="orderTimeline">
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Customer, Shipping & Status Controls -->
                 <div>
-                    <!-- Status Updater -->
                     <div class="detail-card">
                         <h3>Update Order Status</h3>
-                        <form class="admin-form" action="#" method="post">
+                        <form class="admin-form" id="orderStatusForm" onsubmit="return false;">
                             <div>
-                                <label for="orderStatus">Fulfillment Stage</label>
-                                <select id="orderStatus" name="orderStatus">
-                                    <option value="processing" selected>Processing (In Warehouse)</option>
-                                    <option value="shipped">Shipped (In Transit)</option>
-                                    <option value="delivered">Delivered (Completed)</option>
-                                    <option value="cancelled">Cancelled (Void)</option>
+                                <label for="orderStatusSelect">Fulfillment Stage</label>
+                                <select id="orderStatusSelect" name="orderStatus">
+                                    <option value="Processing">Processing (In Warehouse)</option>
+                                    <option value="Shipped">Shipped (In Transit)</option>
+                                    <option value="Delivered">Delivered (Completed)</option>
+                                    <option value="Cancelled">Cancelled (Void)</option>
                                 </select>
                             </div>
 
                             <div>
-                                <label for="trackingNumber">Courier Tracking ID</label>
-                                <input type="text" id="trackingNumber" name="trackingNumber" value="DHL-EXP-992144">
+                                <label for="orderTrackingInput">Courier Tracking ID</label>
+                                <input type="text" id="orderTrackingInput" name="trackingNumber" value="">
                             </div>
 
-                            <button type="button" class="btn btn-primary" style="width: 100%;"><i class="fas fa-sync-alt"></i> Update Order</button>
+                            <button type="button" class="btn btn-primary" id="updateOrderStatusBtn" style="width: 100%;"><i class="fas fa-sync-alt"></i> Update Order Status</button>
                         </form>
                     </div>
 
-                    <!-- Customer Profile -->
                     <div class="detail-card">
                         <h3>Customer Information</h3>
                         <div class="user-cell" style="margin-bottom: 1rem;">
-                            <div class="avatar">EV</div>
+                            <div class="avatar" id="customerAvatar">CU</div>
                             <div>
-                                <div class="user-name">Eleanor Vance</div>
-                                <div class="user-email">eleanor.v@example.com</div>
+                                <div class="user-name" id="customerName">Customer</div>
+                                <div class="user-email" id="customerEmail">—</div>
                             </div>
                         </div>
                         <div style="font-size: 0.85rem; line-height: 1.6; color: var(--color-text-muted);">
-                            <div><strong>Phone:</strong> +977 980-1234567</div>
-                            <div><strong>Customer since:</strong> February 2025</div>
-                            <div><strong>Orders count:</strong> 4 lifetime orders</div>
+                            <div><strong>Phone:</strong> <span id="customerPhone">—</span></div>
+                            <div><strong>Notes:</strong> <span id="customerNotes">—</span></div>
                         </div>
                     </div>
 
-                    <!-- Shipping Address -->
                     <div class="detail-card">
                         <h3>Shipping & Delivery</h3>
                         <div style="font-size: 0.85rem; line-height: 1.6;">
-                            <strong>Eleanor Vance</strong><br>
-                            Durbar Marg, Avenue 4<br>
-                            Ward No. 1, Heritage Plaza Suite 302<br>
-                            Kathmandu 44600, Nepal<br>
+                            <strong id="shippingRecipient">—</strong><br>
+                            <span id="shippingAddressLine">—</span><br>
+                            <span id="shippingCityZip">—</span><br>
                             <span style="display: inline-block; margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-gold); font-weight: 600;">
-                                <i class="fas fa-truck-fast"></i> Express Priority Courier
+                                <i class="fas fa-truck-fast"></i> Express Courier Delivery
                             </span>
                         </div>
                     </div>
 
-                    <!-- Payment Information -->
                     <div class="detail-card">
                         <h3>Payment Details</h3>
                         <div style="font-size: 0.85rem; line-height: 1.6;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
                                 <span>Method:</span>
-                                <strong>Mastercard &bull;&bull;&bull;&bull; 4082</strong>
+                                <strong id="paymentMethodText">Cash on Delivery</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
                                 <span>Status:</span>
-                                <span class="badge badge-success">Captured</span>
+                                <span class="badge badge-success" id="paymentStatusBadge">Paid</span>
                             </div>
                             <div style="display: flex; justify-content: space-between;">
-                                <span>Transaction ID:</span>
-                                <code>TXN-88401928</code>
+                                <span>Tracking ID:</span>
+                                <code id="trackingCodeText">—</code>
                             </div>
                         </div>
                     </div>

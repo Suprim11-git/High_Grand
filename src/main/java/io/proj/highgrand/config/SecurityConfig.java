@@ -61,10 +61,17 @@ public class SecurityConfig {
                         // --------------------------------
                         .requestMatchers(
                                 "/",
+                                "/signup",
+                                "/home",
+                                "/index",
                                 "/Home.html",
+                                "/error",
                                 "/pages/auth/**",
                                 "/pages/product/**",
                                 "/pages/account/**",
+                                "/pages/cart/**",
+                                "/pages/checkout/**",
+                                "/pages/order/**",
                                 "/css/**",
                                 "/js/**",
                                 "/assets/**",
@@ -72,13 +79,16 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // --------------------------------
-                        // Public product/category APIs
+                        // Public product/category/order APIs
                         // --------------------------------
                         .requestMatchers(
                                 "/api/products",
                                 "/api/products/**",
                                 "/api/categories",
-                                "/api/categories/**"
+                                "/api/categories/**",
+                                "/api/orders",
+                                "/api/orders/**",
+                                "/api/admin/dashboard/**"
                         ).permitAll()
 
                         // --------------------------------
@@ -92,7 +102,7 @@ public class SecurityConfig {
                         // --------------------------------
                         // Admin area
                         // --------------------------------
-                        .requestMatchers("/admin/**")
+                        .requestMatchers("/admin/**", "/admin/api/**")
                         .hasRole("ADMIN")
 
                         // --------------------------------

@@ -58,55 +58,31 @@
             </div>
 
             <div class="form-card" id="editFormCard" style="max-width: 760px; display:none;">
-                <form class="admin-form" action="/admin/update_product" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" id="productId" value="">
+                <div class="product-banner" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 1rem 1.25rem; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); margin-bottom: 1.5rem;">
                     <div>
-                        <label for="productName">Product Name *</label>
-                        <input type="text" id="productName" name="productName" value="" required>
+                        <span style="display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-gold); font-weight: 600;">Product Being Edited</span>
+                        <strong id="displayProductName" style="font-size: 1.15rem; color: var(--color-text);">—</strong>
+                        <span id="displayProductSku" style="display: block; font-size: 0.8rem; font-family: monospace; color: var(--color-text-muted); margin-top: 2px;"></span>
+                    </div>
+                    <div style="min-width: 220px;">
+                        <label for="productSelectDropdown" style="display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 4px;">Switch Product</label>
+                        <select id="productSelectDropdown" class="filter-select" style="width: 100%; padding: 0.45rem 0.6rem; font-size: 0.85rem;">
+                            <option value="">Select a product…</option>
+                        </select>
+                    </div>
+                </div>
+
+                <form class="admin-form" action="/admin/update_product" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" id="productId" value="">
+
+                    <div>
+                        <label for="price">Price (Rs.) *</label>
+                        <input type="number" id="price" name="price" min="0" step="0.01" value="" required>
                     </div>
 
-                    <div class="form-row-2">
-                        <div>
-                            <label for="category">Category *</label>
-                            <select id="category" name="category" data-category-options required>
-                                <option value="">Select Category</option>
-                                <option value="Footwear">Footwear</option>
-                                <option value="Men's Wear">Men's Wear</option>
-                                <option value="Women's Wear">Women's Wear</option>
-                                <option value="Accessories">Accessories</option>
-                                <option value="Fragrances">Fragrances</option>
-                                <option value="Bags & Leather">Bags & Leather</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="sku">SKU Identifier *</label>
-                            <input type="text" id="sku" name="sku" value="" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row-2">
-                        <div>
-                            <label for="price">Regular Price (Rs.) *</label>
-                            <input type="number" id="price" name="price" min="0" step="0.01" value="" required>
-                        </div>
-
-                        <div>
-                            <label for="salePrice">Sale / Promotional Price (Rs.)</label>
-                            <input type="number" id="salePrice" name="salePrice" min="0" step="0.01" value="">
-                        </div>
-                    </div>
-
-                    <div class="form-row-2">
-                        <div>
-                            <label for="stock">Current Stock Quantity *</label>
-                            <input type="number" id="stock" name="stock" min="0" value="" required>
-                        </div>
-
-                        <div>
-                            <label for="minStock">Low Stock Threshold</label>
-                            <input type="number" id="minStock" name="minStock" min="0" value="5">
-                        </div>
+                    <div>
+                        <label for="stock">Stock Quantity *</label>
+                        <input type="number" id="stock" name="stock" min="0" value="" required>
                     </div>
 
                     <div>
@@ -129,7 +105,7 @@
                     </div>
 
                     <div>
-                        <label for="description">Product Description & Craftsmanship</label>
+                        <label for="description">Product Description</label>
                         <textarea id="description" name="description"></textarea>
                     </div>
 

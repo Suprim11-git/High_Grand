@@ -52,55 +52,49 @@
                 </div>
             </header>
 
-            <div class="alert alert-warning">
+            <div class="alert alert-warning" id="inventoryAlert" style="display: none;">
                 <i class="fas fa-triangle-exclamation"></i>
-                <div>
-                    <strong>Reorder Advisory:</strong> 2 items are running critically low and 1 item is completely out of stock. Replenish supplier orders to prevent backorders.
+                <div id="inventoryAlertText">
+                    <strong>Reorder Advisory:</strong> Items require attention.
                 </div>
             </div>
 
             <section class="dashboard-cards" style="margin-bottom: 2rem;">
                 <div class="card">
                     <h3>Total In-Stock Units</h3>
-                    <p>1,420</p>
-                    <div class="card-meta">Across 125 unique catalog SKUs</div>
+                    <p id="invTotalStock">0</p>
+                    <div class="card-meta" id="invUniqueSkus">Across 0 catalog items</div>
                 </div>
 
                 <div class="card">
                     <h3>Low Stock Alerts</h3>
-                    <p style="color: var(--color-gold);">2</p>
-                    <div class="card-meta">At or below 5 units remaining</div>
+                    <p style="color: var(--color-gold);" id="invLowStock">0</p>
+                    <div class="card-meta">At or below safety threshold</div>
                 </div>
 
                 <div class="card">
                     <h3>Out of Stock</h3>
-                    <p style="color: var(--color-sale);">1</p>
-                    <div class="card-meta">Unavailable for customer purchase</div>
+                    <p style="color: var(--color-sale);" id="invOutOfStock">0</p>
+                    <div class="card-meta">Unavailable for purchase</div>
                 </div>
             </section>
 
             <div class="filter-bar">
-                <div class="tab-group">
+                <div class="tab-group" id="invTabGroup">
                     <button type="button" class="tab-btn active" data-filter="all">All Inventory</button>
-                    <button type="button" class="tab-btn" data-filter="low stock">Low Stock (2)</button>
-                    <button type="button" class="tab-btn" data-filter="out of stock">Out of Stock (1)</button>
+                    <button type="button" class="tab-btn" data-filter="low stock">Low Stock</button>
+                    <button type="button" class="tab-btn" data-filter="out of stock">Out of Stock</button>
                     <button type="button" class="tab-btn" data-filter="in stock">Adequate Stock</button>
                 </div>
 
                 <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
                     <label class="search-field" style="max-width: 280px;">
-                        <input type="search" placeholder="Search SKU, item, rack..." aria-label="Search inventory">
+                        <input type="search" id="invSearchInput" placeholder="Search SKU, item..." aria-label="Search inventory">
                         <span><i class="fas fa-search"></i></span>
                     </label>
 
                     <select id="categoryFilter" class="filter-select" aria-label="Filter by category">
                         <option value="all">All Categories</option>
-                        <option value="Footwear">Footwear</option>
-                        <option value="Men's Wear">Men's Wear</option>
-                        <option value="Women's Wear">Women's Wear</option>
-                        <option value="Accessories">Accessories</option>
-                        <option value="Fragrances">Fragrances</option>
-                        <option value="Bags & Leather">Bags & Leather</option>
                     </select>
                 </div>
             </div>
@@ -119,20 +113,13 @@
                             <th>Quick Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="inventoryTableBody">
                     </tbody>
                 </table>
             </div>
 
             <div class="pagination">
-                <div>Showing 1 to 8 of 125 inventory items</div>
-                <div class="page-numbers">
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <span>...</span>
-                    <a href="#">16</a>
-                </div>
+                <div id="invPaginationText">Showing inventory items</div>
             </div>
         </main>
     </div>

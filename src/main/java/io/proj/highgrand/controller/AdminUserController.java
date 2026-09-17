@@ -22,9 +22,6 @@ public class AdminUserController {
     public AdminUserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    // GET ALL USERS
-
     @GetMapping
     public List<Map<String, Object>> getAllUsers() {
 
@@ -49,8 +46,6 @@ public class AdminUserController {
 
         return result;
     }
-
-    // ENABLE / DISABLE USER
 
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> updateStatus(
@@ -88,9 +83,6 @@ public class AdminUserController {
 
         return ResponseEntity.ok(response);
     }
-
-
-    // DELETE USER
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(
