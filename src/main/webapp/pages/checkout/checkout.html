@@ -171,10 +171,24 @@
 
             const CART_KEY = 'highgrand_cart';
 
+            let selectedProducts = [];
+            let grandTotal = 0;
+            let subtotal = 0;
+            let shippingFee = 0;
+            let tax = 0;
+
+            // ---------------------------------------------------------
+            // Format money
+            // ---------------------------------------------------------
             function money(val) {
-                return 'Rs. ' + Number(val || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+                return 'Rs. ' + Number(val || 0).toLocaleString('en-IN', {
+                    maximumFractionDigits: 0
+                });
             }
 
+            // ---------------------------------------------------------
+            // Escape HTML
+            // ---------------------------------------------------------
             function escapeHtml(str) {
                 return String(str || '')
                     .replace(/&/g, '&amp;')
@@ -184,120 +198,689 @@
                     .replace(/'/g, '&#039;');
             }
 
+            // ---------------------------------------------------------
+            // Get product image
+            // ---------------------------------------------------------
             function getProductImage(product) {
+
                 if (product.hasImage || product.image) {
-                    if (product.image && product.image.startsWith('/')) return product.image;
-                    if (product.hasImage) return '/api/products/' + product.id + '/image';
+
+                    if (product.image &&
+                        typeof product.image === 'string' &&
+                        product.image.startsWith('/')) {
+
+                        return product.image;
+                    }
+
+                    if (product.hasImage) {
+                        return '/api/products/' + product.id + '/image';
+                    }
+
                     return product.image;
                 }
+
                 return '../../assets/images/logo.png';
             }
 
+            // ---------------------------------------------------------
+            // Load checkout products
+            // ---------------------------------------------------------
             async function initializeCheckoutSummary() {
-                const itemsContainer = document.getElementById('checkoutItemsList');
-                const subtotalEl = document.getElementById('checkoutSubtotal');
-                const shippingEl = document.getElementById('checkoutShipping');
-                const totalEl = document.getElementById('checkoutTotal');
-                const placeOrderBtn = document.getElementById('placeOrderBtn');
 
-                if (!itemsContainer) return;
+                const itemsContainer =
+                    document.getElementById('checkoutItemsList');
 
-                const urlParams = new URLSearchParams(window.location.search);
-                const buyNowId = urlParams.get('buyNow') || urlParams.get('productId');
-                const qtyParam = Math.max(1, parseInt(urlParams.get('qty') || '1', 10));
+                const subtotalEl =
+                    document.getElementById('checkoutSubtotal');
 
-                let selectedProducts = [];
+                const shippingEl =
+                    document.getElementById('checkoutShipping');
 
-                // 1. Check if direct Buy Now parameter is present
+                const totalEl =
+                    document.getElementById('checkoutTotal');
+
+                const placeOrderBtn =
+                    document.getElementById('placeOrderBtn');
+
+                if (!itemsContainer) {
+                    return;
+                }
+
+                selectedProducts = [];
+                grandTotal = 0;
+                subtotal = 0;
+                shippingFee = 0;
+                tax = 0;
+
+                // -----------------------------------------------------
+                // Check Buy Now
+                // -----------------------------------------------------
+                const urlParams =
+                    new URLSearchParams(window.location.search);
+
+                const buyNowId =
+                    urlParams.get('buyNow') ||
+                    urlParams.get('productId');
+
+                const qtyParam =
+                    Math.max(
+                        1,
+                        parseInt(urlParams.get('qty') || '1', 10)
+                    );
+
+                // -----------------------------------------------------
+                // Buy Now
+                // -----------------------------------------------------
                 if (buyNowId) {
+
                     try {
-                        const res = await fetch('/api/products/' + buyNowId);
-                        if (res.ok) {
-                            const p = await res.json();
+
+                        const response =
+                            await fetch('/api/products/' + buyNowId);
+
+                        if (response.ok) {
+
+                            const product =
+                                await response.json();
+
                             selectedProducts.push({
-                                id: p.id,
-                                name: p.name,
-                                price: Number(p.price || 0),
-                                image: getProductImage(p),
+                                id: product.id,
+                                name: product.name,
+                                price: Number(product.price || 0),
+                                image: getProductImage(product),
                                 quantity: qtyParam
                             });
                         }
-                    } catch (err) {
-                        console.error('Error fetching buyNow product:', err);
+
+                    } catch (error) {
+
+                        console.error(
+                            'Error loading Buy Now product:',
+                            error
+                        );
                     }
                 }
 
-                // 2. If no direct Buy Now item found, read from localStorage cart
+                // -----------------------------------------------------
+                // Load normal cart if not Buy Now
+                // -----------------------------------------------------
                 if (selectedProducts.length === 0) {
+
                     try {
-                        const rawCart = localStorage.getItem(CART_KEY);
+
+                        const rawCart =
+                            localStorage.getItem(CART_KEY);
+
                         if (rawCart) {
-                            selectedProducts = JSON.parse(rawCart) || [];
+
+                            selectedProducts =
+                                JSON.parse(rawCart) || [];
                         }
-                    } catch (e) {
-                        console.error('Error reading cart for checkout:', e);
+
+                    } catch (error) {
+
+                        console.error(
+                            'Error reading cart:',
+                            error
+                        );
                     }
                 }
 
-                // Empty state handling
-                if (!selectedProducts || selectedProducts.length === 0) {
+                // -----------------------------------------------------
+                // Empty cart
+                // -----------------------------------------------------
+                if (
+                    !selectedProducts ||
+                    selectedProducts.length === 0
+                ) {
+
                     itemsContainer.innerHTML = `
-                        <div style="padding: 1.5rem 0; text-align: center; color: var(--color-text-muted);">
-                            <i class="fas fa-shopping-bag" style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i>
-                            <p style="font-size: 0.9rem;">No product selected for checkout.</p>
-                            <a href="../product/category.html" class="btn btn-primary" style="margin-top: 0.75rem; display: inline-block; font-size: 0.8rem; padding: 0.5rem 1rem;">
-                                Browse Products
-                            </a>
-                        </div>
-                    `;
-                    if (subtotalEl) subtotalEl.textContent = money(0);
-                    if (shippingEl) shippingEl.textContent = 'Free';
-                    if (totalEl) totalEl.textContent = money(0);
+                    <div style="
+                        padding:1.5rem 0;
+                        text-align:center;
+                        color:var(--color-text-muted);
+                    ">
+                        <i class="fas fa-shopping-bag"
+                           style="
+                               font-size:2rem;
+                               margin-bottom:0.5rem;
+                               opacity:0.5;
+                           ">
+                        </i>
+
+                        <p style="font-size:0.9rem;">
+                            No product selected for checkout.
+                        </p>
+
+                        <a
+                            href="../product/category.html"
+                            class="btn btn-primary"
+                            style="
+                                margin-top:0.75rem;
+                                display:inline-block;
+                                font-size:0.8rem;
+                                padding:0.5rem 1rem;
+                            ">
+                            Browse Products
+                        </a>
+                    </div>
+                `;
+
+                    if (subtotalEl) {
+                        subtotalEl.textContent = money(0);
+                    }
+
+                    if (shippingEl) {
+                        shippingEl.textContent = 'Free';
+                    }
+
+                    if (totalEl) {
+                        totalEl.textContent = money(0);
+                    }
+
                     if (placeOrderBtn) {
                         placeOrderBtn.disabled = true;
                         placeOrderBtn.style.opacity = '0.5';
                         placeOrderBtn.style.cursor = 'not-allowed';
                     }
+
                     return;
                 }
 
-                // Render items
-                let subtotal = 0;
-                itemsContainer.innerHTML = selectedProducts.map(function (item) {
-                    const price = Number(item.price || 0);
-                    const qty = Number(item.quantity || 1);
-                    const itemTotal = price * qty;
-                    subtotal += itemTotal;
+                // -----------------------------------------------------
+                // Render selected products
+                // -----------------------------------------------------
+                subtotal = 0;
 
-                    const imgSrc = item.image ? escapeHtml(item.image) : '../../assets/images/logo.png';
+                itemsContainer.innerHTML =
+                    selectedProducts.map(function (item) {
 
-                    return `
+                        const price =
+                            Number(item.price || 0);
+
+                        const quantity =
+                            Number(item.quantity || 1);
+
+                        const itemTotal =
+                            price * quantity;
+
+                        subtotal += itemTotal;
+
+                        const imageSrc =
+                            item.image
+                                ? escapeHtml(item.image)
+                                : '../../assets/images/logo.png';
+
+                        return `
                         <div class="checkout-product-item">
-                            <img src="${imgSrc}" alt="${escapeHtml(item.name)}" class="checkout-product-img" onerror="this.onerror=null;this.src='../../assets/images/logo.png';">
+
+                            <img
+                                src="${imageSrc}"
+                                alt="${escapeHtml(item.name)}"
+                                class="checkout-product-img"
+                                onerror="
+                                    this.onerror=null;
+                                    this.src='../../assets/images/logo.png';
+                                "
+                            >
+
                             <div class="checkout-product-details">
-                                <h4 class="checkout-product-name">${escapeHtml(item.name)}</h4>
-                                <div class="checkout-product-meta">${money(price)} × ${qty}</div>
+
+                                <h4 class="checkout-product-name">
+                                    ${escapeHtml(item.name)}
+                                </h4>
+
+                                <div class="checkout-product-meta">
+                                    ${money(price)} × ${quantity}
+                                </div>
+
                             </div>
-                            <div class="checkout-product-price">${money(itemTotal)}</div>
+
+                            <div class="checkout-product-price">
+                                ${money(itemTotal)}
+                            </div>
+
                         </div>
                     `;
-                }).join('');
 
-                const shipping = 0; // Free shipping
-                const grandTotal = subtotal + shipping;
+                    }).join('');
 
-                if (subtotalEl) subtotalEl.textContent = money(subtotal);
-                if (shippingEl) shippingEl.textContent = 'Free';
-                if (totalEl) totalEl.textContent = money(grandTotal);
+                // -----------------------------------------------------
+                // Calculate order totals
+                // -----------------------------------------------------
+                shippingFee = 0;
+                tax = 0;
 
+                grandTotal =
+                    subtotal +
+                    shippingFee +
+                    tax;
+
+                // -----------------------------------------------------
+                // Display totals
+                // -----------------------------------------------------
+                if (subtotalEl) {
+                    subtotalEl.textContent =
+                        money(subtotal);
+                }
+
+                if (shippingEl) {
+                    shippingEl.textContent =
+                        'Free';
+                }
+
+                if (totalEl) {
+                    totalEl.textContent =
+                        money(grandTotal);
+                }
+
+                // -----------------------------------------------------
+                // Enable Place Order
+                // -----------------------------------------------------
                 if (placeOrderBtn) {
+
                     placeOrderBtn.disabled = false;
                     placeOrderBtn.style.opacity = '1';
                     placeOrderBtn.style.cursor = 'pointer';
                 }
             }
 
-            document.addEventListener('DOMContentLoaded', initializeCheckoutSummary);
+            // ---------------------------------------------------------
+            // Place Order
+            // ---------------------------------------------------------
+            async function placeOrder(event) {
+
+                event.preventDefault();
+
+                const form =
+                    document.getElementById('checkoutForm');
+
+                const placeOrderBtn =
+                    document.getElementById('placeOrderBtn');
+
+                if (!form) {
+                    return;
+                }
+
+                // -----------------------------------------------------
+                // Make sure products exist
+                // -----------------------------------------------------
+                if (
+                    !selectedProducts ||
+                    selectedProducts.length === 0
+                ) {
+
+                    alert('Your cart is empty.');
+                    return;
+                }
+
+                if (grandTotal <= 0) {
+
+                    alert(
+                        'Order total must be greater than zero.'
+                    );
+
+                    return;
+                }
+
+                // -----------------------------------------------------
+                // Read checkout form fields
+                // -----------------------------------------------------
+                const customerName =
+                    (
+                        form.querySelector('[name="fullname"]') ||
+                        form.querySelector('[name="customerName"]')
+                    )?.value.trim() || '';
+
+                const customerEmail =
+                    (
+                        form.querySelector('[name="email"]') ||
+                        form.querySelector('[name="customerEmail"]')
+                    )?.value.trim() || '';
+
+                const customerPhone =
+                    (
+                        form.querySelector('[name="phone"]') ||
+                        form.querySelector('[name="customerPhone"]')
+                    )?.value.trim() || '';
+
+                const shippingAddress =
+                    (
+                        form.querySelector('[name="address"]') ||
+                        form.querySelector('[name="shippingAddress"]')
+                    )?.value.trim() || '';
+
+                const city =
+                    form.querySelector('[name="city"]')
+                        ?.value.trim() || '';
+
+                const postalCode =
+                    (
+                        form.querySelector('[name="postal"]') ||
+                        form.querySelector('[name="postalCode"]')
+                    )?.value.trim() || '';
+
+                const notes =
+                    form.querySelector('[name="notes"]')
+                        ?.value.trim() || '';
+
+                // -----------------------------------------------------
+                // Payment method
+                // -----------------------------------------------------
+                let paymentMethod = '';
+
+                const paymentSelect =
+                    form.querySelector(
+                        '[name="payment_method"]'
+                    ) ||
+                    form.querySelector(
+                        '[name="paymentMethod"]'
+                    );
+
+                if (paymentSelect) {
+                    paymentMethod =
+                        paymentSelect.value.trim();
+                }
+
+                // -----------------------------------------------------
+                // Basic validation
+                // -----------------------------------------------------
+                if (!customerName) {
+
+                    alert('Please enter your full name.');
+                    return;
+                }
+
+                if (!customerEmail) {
+
+                    alert('Please enter your email.');
+                    return;
+                }
+
+                if (!shippingAddress) {
+
+                    alert('Please enter your delivery address.');
+                    return;
+                }
+
+                if (!city) {
+
+                    alert('Please enter your city.');
+                    return;
+                }
+
+                // -----------------------------------------------------
+                // Create items summary
+                //
+                // Example:
+                // Oxford Classic x 1|Grand Noir Parfum x 2
+                // -----------------------------------------------------
+                const itemsSummary =
+                    selectedProducts.map(function (item) {
+
+                        const productId = Number(item.id || 0);
+
+                        const name =
+                            String(
+                                item.name ||
+                                'Unknown Product'
+                            );
+
+                        const quantity =
+                            Number(
+                                item.quantity || 1
+                            );
+
+                        return productId +
+                            ':' +
+                            name +
+                            ' x ' +
+                            quantity;
+
+                    }).join('|');
+
+                // -----------------------------------------------------
+                // Calculate total item count
+                // -----------------------------------------------------
+                const itemCount =
+                    selectedProducts.reduce(
+                        function (total, item) {
+
+                            return total +
+                                Number(
+                                    item.quantity || 1
+                                );
+
+                        },
+                        0
+                    );
+
+                // -----------------------------------------------------
+                // Disable button
+                // -----------------------------------------------------
+                if (placeOrderBtn) {
+
+                    placeOrderBtn.disabled = true;
+
+                    placeOrderBtn.textContent =
+                        'Processing Order...';
+                }
+
+                try {
+
+                    // -------------------------------------------------
+                    // Prepare request
+                    // -------------------------------------------------
+                    const formData =
+                        new URLSearchParams();
+
+                    formData.append(
+                        'customerName',
+                        customerName
+                    );
+
+                    formData.append(
+                        'customerEmail',
+                        customerEmail
+                    );
+
+                    formData.append(
+                        'customerPhone',
+                        customerPhone
+                    );
+
+                    formData.append(
+                        'shippingAddress',
+                        shippingAddress
+                    );
+
+                    formData.append(
+                        'city',
+                        city
+                    );
+
+                    formData.append(
+                        'postalCode',
+                        postalCode
+                    );
+
+                    formData.append(
+                        'itemsSummary',
+                        itemsSummary
+                    );
+
+                    formData.append(
+                        'itemCount',
+                        itemCount
+                    );
+
+                    formData.append(
+                        'subtotal',
+                        subtotal.toFixed(2)
+                    );
+
+                    formData.append(
+                        'shippingFee',
+                        shippingFee.toFixed(2)
+                    );
+
+                    formData.append(
+                        'tax',
+                        tax.toFixed(2)
+                    );
+
+                    formData.append(
+                        'totalAmount',
+                        grandTotal.toFixed(2)
+                    );
+
+                    formData.append(
+                        'paymentMethod',
+                        paymentMethod || 'Cash on Delivery'
+                    );
+
+                    formData.append(
+                        'notes',
+                        notes
+                    );
+
+                    // -------------------------------------------------
+                    // Send to Spring Boot
+                    // -------------------------------------------------
+                    const response =
+                        await fetch('/api/orders', {
+
+                            method: 'POST',
+
+                            headers: {
+                                'Content-Type':
+                                    'application/x-www-form-urlencoded'
+                            },
+
+                            body: formData.toString()
+                        });
+
+                    // -------------------------------------------------
+                    // Not logged in
+                    // -------------------------------------------------
+                    if (
+                        response.status === 401 ||
+                        response.status === 403
+                    ) {
+
+                        alert(
+                            'Please log in before placing an order.'
+                        );
+
+                        window.location.href =
+                            '../auth/login.html';
+
+                        return;
+                    }
+
+                    // -------------------------------------------------
+                    // Backend error
+                    // -------------------------------------------------
+                    if (!response.ok) {
+
+                        let errorMessage =
+                            'Failed to place order.';
+
+                        try {
+
+                            const errorData =
+                                await response.json();
+
+                            if (errorData.error) {
+
+                                errorMessage =
+                                    errorData.error;
+                            }
+
+                        } catch (error) {
+
+                            console.error(
+                                'Could not read error response:',
+                                error
+                            );
+                        }
+
+                        throw new Error(errorMessage);
+                    }
+
+                    // -------------------------------------------------
+                    // Successful order
+                    // -------------------------------------------------
+                    const savedOrder =
+                        await response.json();
+
+                    console.log(
+                        'Order successfully created:',
+                        savedOrder
+                    );
+
+                    // -------------------------------------------------
+                    // Clear cart
+                    // -------------------------------------------------
+                    localStorage.removeItem(CART_KEY);
+
+                    // -------------------------------------------------
+                    // Success
+                    // -------------------------------------------------
+                    alert(
+                        'Order placed successfully!'
+                    );
+
+                    // -------------------------------------------------
+                    // Go to Order History
+                    // -------------------------------------------------
+                    window.location.href =
+                        '../order/list.html';
+
+                } catch (error) {
+
+                    console.error(
+                        'Order placement error:',
+                        error
+                    );
+
+                    alert(
+                        error.message ||
+                        'Something went wrong while placing your order.'
+                    );
+
+                    if (placeOrderBtn) {
+
+                        placeOrderBtn.disabled = false;
+
+                        placeOrderBtn.textContent =
+                            'Place Order';
+                    }
+                }
+            }
+
+            // ---------------------------------------------------------
+            // Initialize
+            // ---------------------------------------------------------
+            document.addEventListener(
+                'DOMContentLoaded',
+                function () {
+
+                    initializeCheckoutSummary();
+
+                    const checkoutForm =
+                        document.getElementById('checkoutForm');
+
+                    if (checkoutForm) {
+
+                        checkoutForm.addEventListener(
+                            'submit',
+                            placeOrder
+                        );
+                    }
+                }
+            );
+
         })();
     </script>
 </body>

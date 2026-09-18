@@ -4,100 +4,602 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Order History | High Grand</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+
     <link rel="stylesheet" href="../../css/home.css">
     <link rel="stylesheet" href="../../css/pages.css">
     <link rel="stylesheet" href="../../css/responsiveH.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="announcement-bar">
-        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
+
+<!-- Announcement -->
+<div class="announcement-bar">
+    <p>
+        Free shipping on orders over $75
+        &nbsp;|&nbsp;
+        New Spring Collection now live
+    </p>
+</div>
+
+
+<!-- Header -->
+<header class="site-header">
+
+    <div class="header-inner">
+
+        <a href="../../Home.html" class="brand-logo">
+
+            <img
+                    src="../../assets/images/logo.png"
+                    alt="High Grand logo">
+
+            <span class="brand-name">
+                    HIGH GRAND
+                </span>
+
+        </a>
+
+
+        <nav class="main-nav" aria-label="Main navigation">
+
+            <ul>
+
+                <li>
+                    <a href="../../Home.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../product/category.html">
+                        Shop
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../account/blog.html">
+                        Blog
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../account/about.html">
+                        About
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+            <div class="header-icons">
+
+                <a
+                        href="../auth/login.html"
+                        aria-label="Account">
+
+                    <i class="fas fa-user"></i>
+
+                </a>
+
+                <a
+                        href="../cart/cart.html"
+                        aria-label="Shopping cart">
+
+                    <i class="fas fa-shopping-bag"></i>
+
+                </a>
+
+                <button
+                        class="mobile-menu-btn"
+                        aria-label="Open menu"
+                        aria-expanded="false">
+
+                    <i class="fas fa-bars"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="../../Home.html" class="brand-logo">
-                <img src="../../assets/images/logo.png" alt="High Grand logo">
-                <span class="brand-name">HIGH GRAND</span>
+
+    <nav
+            class="mobile-nav"
+            aria-label="Mobile navigation">
+
+        <ul>
+
+            <li>
+                <a href="list.html">
+                    Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="../auth/login.html">
+                    Account
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<!-- Main -->
+<main>
+
+    <section class="page-hero">
+
+        <p class="breadcrumb">
+            <a href="../../Home.html">
+                Home
             </a>
-            <nav class="main-nav" aria-label="Main navigation">
-                <ul>
-                    <li><a href="../../Home.html">Home</a></li>
-                    <li><a href="../product/category.html">Shop</a></li>
-                    <li><a href="../account/blog.html">Blog</a></li>
-                    <li><a href="../account/about.html">About</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <div class="header-icons">
-                    <a href="../auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
-                    <a href="../cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
-                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+            /
+            Orders
+        </p>
+
+        <h1>
+            Order History
+        </h1>
+
+        <p>
+            View your orders and track your purchases.
+        </p>
+
+    </section>
+
+
+    <div class="page-wrap">
+
+        <!--
+            Orders will be loaded from the backend here.
+        -->
+        <div id="orderList">
+
+            <div class="loading-orders">
+                <p>
+                    Loading your orders...
+                </p>
             </div>
+
         </div>
-        <nav class="mobile-nav" aria-label="Mobile navigation">
-            <ul>
-                <li><a href="list.html">Orders</a></li>
-                <li><a href="../auth/login.html">Account</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section class="page-hero">
-            <p class="breadcrumb"><a href="../../Home.html">Home</a> / Orders</p>
-            <h1>Order History</h1>
-            <p>Sample orders for layout. Tracking and status updates will come from the backend.</p>
-        </section>
+    </div>
 
-        <div class="page-wrap">
-            <article class="order-card">
-                <div>
-                    <h3>Order #HG-1042</h3>
-                    <p>Placed on 12 Aug 2026 · 2 items</p>
+</main>
+
+
+<!-- Footer -->
+<footer class="site-footer">
+
+    <div class="footer-bottom">
+
+        <p>
+            &copy; 2026 High Grand.
+            All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="../../js/home.js"></script>
+
+
+<script>
+
+    async function loadOrders() {
+
+        const orderList =
+            document.getElementById("orderList");
+
+        try {
+
+            const response =
+                await fetch("/api/orders/my");
+
+            if (!response.ok) {
+
+                if (response.status === 401 ||
+                    response.status === 403) {
+
+                    orderList.innerHTML = `
+                            <div class="empty-orders">
+
+                                <h3>
+                                    Please log in
+                                </h3>
+
+                                <p>
+                                    You need to log in
+                                    to view your order history.
+                                </p>
+
+                                <a
+                                    href="../auth/login.html"
+                                    class="btn btn-outline">
+
+                                    Login
+
+                                </a>
+
+                            </div>
+                        `;
+
+                    return;
+                }
+
+                throw new Error(
+                    "Failed to load orders"
+                );
+            }
+
+
+            const orders =
+                await response.json();
+
+
+            orderList.innerHTML = "";
+
+
+            if (!orders ||
+                orders.length === 0) {
+
+                orderList.innerHTML = `
+
+                        <div class="empty-orders">
+
+                            <h3>
+                                No orders yet
+                            </h3>
+
+                            <p>
+                                You haven't placed
+                                any orders yet.
+                            </p>
+
+                            <a
+                                href="../product/category.html"
+                                class="btn btn-outline">
+
+                                Start Shopping
+
+                            </a>
+
+                        </div>
+
+                    `;
+
+                return;
+            }
+
+
+            // Display real orders
+            orders.forEach(order => {
+
+                const article =
+                    document.createElement("article");
+
+                article.className =
+                    "order-card";
+
+
+                const statusClass =
+                    getStatusClass(order.status);
+
+
+                article.innerHTML = `
+
+                        <div>
+
+                            <h3>
+                                Order #${escapeHtml(
+                    order.orderNumber || order.id || ""
+                )}
+                            </h3>
+
+                            <p>
+                                Placed on
+                            ${formatDate(order.orderDate)}
+                            </p>
+
+                        </div>
+
+
+                        <div class="order-items">
+
+                            <strong>
+                                Items
+                            </strong>
+
+                            ${formatItems(
+                    order.itemsSummary
+                )}
+
+                        </div>
+
+
+                        <p>
+                            Rs. ${formatMoney(
+                    order.totalAmount
+                )}
+                        </p>
+
+
+                        <span
+                            class="status ${statusClass}">
+
+                            ${escapeHtml(
+                    order.status || "Processing"
+                )}
+
+                        </span>
+
+
+                        ${
+                    order.trackingNumber
+                        ?
+                        `
+                                <span class="tracking-number">
+                                    Tracking:
+                                    ${escapeHtml(
+                            order.trackingNumber
+                        )}
+                                </span>
+                            `
+                        :
+                        ""
+                }
+
+                    `;
+
+
+                orderList.appendChild(article);
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Order history error:",
+                error
+            );
+
+
+            orderList.innerHTML = `
+
+                    <div class="empty-orders">
+
+                        <h3>
+                            Unable to load orders
+                        </h3>
+
+                        <p>
+                            Something went wrong while
+                            loading your order history.
+                        </p>
+
+                        <button
+                            class="btn btn-outline"
+                            onclick="loadOrders()">
+
+                            Try Again
+
+                        </button>
+
+                    </div>
+
+                `;
+
+        }
+
+    }
+
+    function formatItems(itemsSummary) {
+
+        if (!itemsSummary ||
+            itemsSummary.trim() === "") {
+
+            return `
+            <p>
+                No item information available.
+            </p>
+        `;
+        }
+
+        const items = itemsSummary.split("|");
+
+        return items.map(item => {
+
+            item = item.trim();
+
+            // New format:
+            // productId:Product Name x quantity
+            const separatorIndex = item.indexOf(":");
+
+            if (separatorIndex === -1) {
+
+                // Old orders do not contain product ID.
+                return `
+                <div class="order-item">
+                    ${escapeHtml(item)}
                 </div>
-                <p>$219.98</p>
-                <span class="status status-delivered">Delivered</span>
-                <a href="../product/product.html" class="btn btn-outline">View items</a>
-            </article>
+            `;
+            }
 
-            <article class="order-card">
-                <div>
-                    <h3>Order #HG-1038</h3>
-                    <p>Placed on 02 Aug 2026 · 1 item</p>
+            const productId =
+                item.substring(0, separatorIndex).trim();
+
+            const itemText =
+                item.substring(separatorIndex + 1).trim();
+
+            // Make sure the ID is actually numeric
+            if (!/^\d+$/.test(productId)) {
+
+                return `
+                <div class="order-item">
+                    ${escapeHtml(itemText)}
                 </div>
-                <p>$64.99</p>
-                <span class="status status-shipped">Shipped</span>
-                <a href="../product/product.html" class="btn btn-outline">Track</a>
-            </article>
+            `;
+            }
 
-            <article class="order-card">
-                <div>
-                    <h3>Order #HG-1021</h3>
-                    <p>Placed on 18 Jul 2026 · 3 items</p>
+            return `
+            <div class="order-item order-item-with-image">
+
+                <img
+                    src="/api/products/${productId}/image"
+                    alt="Product"
+                    class="order-history-product-img"
+                    onerror="
+                        this.onerror=null;
+                        this.src='../../assets/images/logo.png';
+                    "
+                >
+
+                <div class="order-history-product-details">
+                    ${escapeHtml(itemText)}
                 </div>
-                <p>$254.97</p>
-                <span class="status status-processing">Processing</span>
-                <a href="../checkout/checkout.html" class="btn btn-outline">Details</a>
-            </article>
-        </div>
-    </main>
 
-    <footer class="site-footer">
-        <div class="footer-bottom">
-            <p>&copy; 2026 High Grand. All rights reserved.</p>
-        </div>
-    </footer>
+            </div>
+        `;
 
-    <script src="../../js/home.js"></script>
+        }).join("");
+
+    }
+
+    function formatDate(dateString) {
+
+        if (!dateString) {
+            return "Date unavailable";
+        }
+
+
+        const date =
+            new Date(dateString);
+
+
+        if (isNaN(date.getTime())) {
+            return dateString;
+        }
+
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            }
+        );
+
+    }
+
+    function formatMoney(amount) {
+
+        if (amount === null ||
+            amount === undefined) {
+
+            return "0.00";
+        }
+
+
+        const number =
+            Number(amount);
+
+
+        if (isNaN(number)) {
+            return "0.00";
+        }
+
+
+        return number.toFixed(2);
+
+    }
+
+    function getStatusClass(status) {
+
+        if (!status) {
+            return "status-processing";
+        }
+
+        const value =
+            status.toLowerCase();
+
+
+        if (value === "delivered") {
+            return "status-delivered";
+        }
+
+        if (value === "shipped") {
+            return "status-shipped";
+        }
+
+
+        if (value === "processing" ||
+            value === "pending") {
+
+            return "status-processing";
+        }
+
+        if (value === "cancelled" ||
+            value === "canceled") {
+
+            return "status-cancelled";
+        }
+
+
+        return "status-processing";
+
+    }
+
+    function escapeHtml(value) {
+
+        if (value === null ||
+            value === undefined) {
+
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        loadOrders
+    );
+
+</script>
+
 </body>
 
 </html>

@@ -742,6 +742,26 @@
     padding: 1.25rem;
     margin-bottom: 1.25rem;
 }
+.order-item-with-image {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0;
+}
+
+.order-history-product-img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+}
+
+.order-history-product-details {
+    flex: 1;
+    font-size: 0.9rem;
+}
 
 @media (max-width: 900px) {
     .auth-page,
