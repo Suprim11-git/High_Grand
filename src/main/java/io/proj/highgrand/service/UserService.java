@@ -53,12 +53,10 @@ public class UserService {
         user.setUsername(username.trim());
         user.setEmail(email.trim().toLowerCase());
 
-        // Store encrypted password
         user.setPassword(
                 passwordEncoder.encode(rawPassword)
         );
 
-        // Regular customer
         user.setRoleId(1L);
         user.setRole("USER");
         user.setEnabled(true);
@@ -68,5 +66,50 @@ public class UserService {
 
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    public User updateProfile(
+            User user,
+            String name,
+            String phone,
+            String address,
+            String city,
+            String postalCode) {
+
+        if (name != null && !name.isBlank()) {
+            user.setName(name.trim());
+        }
+
+        user.setPhone(phone != null && !phone.isBlank() ? phone.trim() : null);
+        user.setAddress(address != null && !address.isBlank() ? address.trim() : null);
+        user.setCity(city != null && !city.isBlank() ? city.trim() : null);
+        user.setPostalCode(postalCode != null && !postalCode.isBlank() ? postalCode.trim() : null);
+
+        return userRepository.save(user);
+    }
+
+    public boolean verifyPassword(User user, String rawPassword) {
+        if (user == null || rawPassword == null) {
+            return false;
+        }
+        return passwordEncoder.matches(rawPassword, user.getPassword());
+    }
+
+    public boolean changePassword(User user, String currentPassword, String newPassword) {
+        if (user == null || currentPassword == null || newPassword == null) {
+            return false;
+        }
+
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            return false;
+        }
+
+        if (newPassword.trim().length() < 6) {
+            throw new IllegalArgumentException("New password must be at least 6 characters.");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword.trim()));
+        userRepository.save(user);
+        return true;
     }
 }

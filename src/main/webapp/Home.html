@@ -15,11 +15,6 @@
 </head>
 
 <body>
-
-    <div class="announcement-bar">
-        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
-    </div>
-
     <header class="site-header">
         <div class="header-inner">
             <a href="Home.html" class="brand-logo">
@@ -42,7 +37,7 @@
                     <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
                 </form>
                 <div class="header-icons">
-                    <a href="pages/auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="pages/account/profile.html" aria-label="Account"><i class="fas fa-user"></i></a>
                     <a href="pages/account/favorites.html" aria-label="Favorites" class="header-fav-link"><i class="fas fa-heart"></i><span class="fav-badge" style="display:none;"></span></a>
                     <a href="pages/cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
                     <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
@@ -59,6 +54,8 @@
                 <li><a href="pages/account/blog.html">Blog</a></li>
                 <li><a href="pages/account/about.html">About</a></li>
                 <li><a href="pages/account/favorites.html">Favorites</a></li>
+                <li><a href="pages/account/profile.html">My Profile</a></li>
+                <li><a href="pages/order/list.html">Orders</a></li>
                 <li><a href="pages/auth/login.html">Login</a></li>
                 <li><a href="pages/auth/signup.html">Sign Up</a></li>
             </ul>
@@ -78,14 +75,14 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hero-card hero-card-main">
+                <a href="pages/product/category.html?category=Women%27s+Wear" class="hero-card hero-card-main">
                     <img src="assets/images/womenwear.jpg" alt="Women's fashion collection">
                     <div class="hero-card-label">Women's Wear</div>
-                </div>
-                <div class="hero-card hero-card-side">
+                </a>
+                <a href="pages/product/category.html?category=Men%27s+Wear" class="hero-card hero-card-side">
                     <img src="assets/images/menwear.jpg" alt="Men's fashion collection">
                     <div class="hero-card-label">Men's Wear</div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -188,8 +185,9 @@
             <div class="footer-links">
                 <h4>Customer Care</h4>
                 <ul>
-                    <li><a href="pages/auth/login.html">My Account</a></li>
+                    <li><a href="pages/account/profile.html">My Account</a></li>
                     <li><a href="pages/order/list.html">Order History</a></li>
+                    <li><a href="pages/account/favorites.html">My Favorites</a></li>
                     <li><a href="pages/cart/cart.html">Shopping Cart</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                 </ul>

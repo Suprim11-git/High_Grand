@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | High Grand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/home.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+    <link rel="stylesheet" href="../../css/profile.css">
+    <link rel="stylesheet" href="../../css/responsiveH.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../../Home.html" class="brand-logo">
+                <img src="../../assets/images/logo.png" alt="High Grand logo">
+                <span class="brand-name">HIGH GRAND</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="../product/category.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <form class="header-search" role="search" action="../product/category.html" method="get">
+                    <input type="search" name="q" placeholder="Search fashion & accessories..." aria-label="Search products">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </form>
+
+                <div class="header-icons">
+                    <a href="profile.html" aria-label="Account" class="active" style="color: var(--color-gold);"><i class="fas fa-user"></i></a>
+                    <a href="favorites.html" aria-label="Favorites" class="header-fav-link"><i class="fas fa-heart"></i><span class="fav-badge" style="display:none;"></span></a>
+                    <a href="../cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
+                    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+            <ul>
+                <li><a href="../../Home.html">Home</a></li>
+                <li><a href="../product/category.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="favorites.html">Favorites</a></li>
+                <li class="active"><a href="profile.html">My Profile</a></li>
+                <li><a href="../order/list.html">Order History</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="../../Home.html">Home</a> / <a href="#">My Account</a> / Profile</p>
+            <span class="section-label">Member Portal</span>
+            <h1>My Profile & Account</h1>
+            <p>Manage your personal profile, delivery addresses, account security, and review your High Grand wardrobe purchases.</p>
+        </section>
+
+        <div class="profile-wrap">
+
+            <div id="profileLoading" style="text-align: center; padding: 4rem 1rem;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2.2rem; color: var(--color-gold); margin-bottom: 1rem;"></i>
+                <p style="color: var(--color-text-muted); font-size: 0.95rem;">Retrieving your account details...</p>
+            </div>
+
+            <div id="guestSection" class="guest-card" style="display: none;">
+                <div class="guest-emblem">
+                    <i class="fas fa-user-lock"></i>
+                </div>
+                <h2>Sign in to Your Account</h2>
+                <p>You are currently browsing as a guest. Please sign in or create an account to access your personal profile, order history, and saved addresses.</p>
+                <div class="guest-actions">
+                    <a href="../auth/login.html" class="btn btn-primary"><i class="fas fa-arrow-right-to-bracket" style="margin-right: 0.5rem;"></i> Sign In</a>
+                    <a href="../auth/signup.html" class="btn btn-outline"><i class="fas fa-user-plus" style="margin-right: 0.5rem;"></i> Create Account</a>
+                </div>
+            </div>
+
+            <div id="profileDashboard" class="profile-grid" style="display: none;">
+
+                <aside class="profile-sidebar">
+                    <div class="profile-card-header">
+                        <div class="profile-avatar-container">
+                            <div class="profile-avatar" id="avatarMonogram">HG</div>
+                        </div>
+                        <span class="profile-badge-vip" id="roleBadge">
+                            <i class="fas fa-gem"></i> <span id="roleBadgeText">Member</span>
+                        </span>
+                        <h3 class="profile-user-name" id="sideUserName">Loading...</h3>
+                        <p class="profile-user-handle" id="sideUserHandle">@username</p>
+                    </div>
+
+                    <ul class="profile-menu">
+                        <li class="active" data-tab="overviewTab">
+                            <a href="#overview"><i class="fas fa-chart-pie"></i> Overview</a>
+                        </li>
+                        <li data-tab="editProfileTab">
+                            <a href="#edit-profile"><i class="fas fa-user-pen"></i> Personal Info</a>
+                        </li>
+                        <li data-tab="securityTab">
+                            <a href="#security"><i class="fas fa-shield-halved"></i> Security & Password</a>
+                        </li>
+                        <li data-tab="ordersTab">
+                            <a href="#orders"><i class="fas fa-box-archive"></i> My Orders <span class="profile-menu-badge" id="menuOrderCount">0</span></a>
+                        </li>
+                        <li>
+                            <a href="favorites.html"><i class="fas fa-heart"></i> Saved Favorites <span class="profile-menu-badge" id="menuFavCount">0</span></a>
+                        </li>
+                        <li class="profile-menu-divider"></li>
+                        <li>
+                            <form id="logoutForm" action="/logout" method="post" style="margin: 0;">
+                                <button type="submit" class="profile-menu-logout">
+                                    <i class="fas fa-arrow-right-from-bracket"></i> Sign Out
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </aside>
+
+                <section class="profile-content">
+
+                    <div id="profileGlobalAlert" style="display: none;" class="alert-banner"></div>
+
+                    <div id="overviewTab" class="tab-pane active">
+                        <div class="panel-header">
+                            <h2>Account Overview</h2>
+                            <p>Summary of your membership status, wardrobe activity, and default delivery information.</p>
+                        </div>
+
+                        <div class="profile-stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-bag-shopping"></i></div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statOrdersCount">0</span>
+                                    <span class="stat-label">Total Orders</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statWishlistCount">0</span>
+                                    <span class="stat-label">Saved Wishlist</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statAccountTier">Member</span>
+                                    <span class="stat-label">Tier Status</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="statMemberSince">2026</span>
+                                    <span class="stat-label">Member Since</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-section-title">
+                                <span>Personal & Shipping Details</span>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="switchTab('editProfileTab')">
+                                    <i class="fas fa-pen-to-square"></i> Edit
+                                </button>
+                            </div>
+                            <div class="info-grid">
+                                <div class="info-cell">
+                                    <span class="info-cell-label">Full Name</span>
+                                    <span class="info-cell-value" id="overviewName">—</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="info-cell-label">Email Address</span>
+                                    <span class="info-cell-value" id="overviewEmail">—</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="info-cell-label">Username</span>
+                                    <span class="info-cell-value" id="overviewUsername">—</span>
+                                </div>
+                                <div class="info-cell">
+                                    <span class="info-cell-label">Phone Number</span>
+                                    <span class="info-cell-value" id="overviewPhone">—</span>
+                                </div>
+                                <div class="info-cell" style="grid-column: 1 / -1;">
+                                    <span class="info-cell-label">Default Shipping Address</span>
+                                    <span class="info-cell-value" id="overviewAddress">—</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section" style="margin-bottom: 0;">
+                            <div class="info-section-title">
+                                <span>Recent Orders</span>
+                                <a href="../order/list.html" class="btn btn-outline btn-sm">
+                                    View All Orders <i class="fas fa-arrow-right" style="margin-left: 0.35rem;"></i>
+                                </a>
+                            </div>
+                            <div id="recentOrdersContainer" class="profile-orders-list">
+                                <p style="color: var(--color-text-muted); font-size: 0.9rem;">No orders placed yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="editProfileTab" class="tab-pane">
+                        <div class="panel-header">
+                            <h2>Personal Information</h2>
+                            <p>Update your personal details and default shipping information for expedited checkout.</p>
+                        </div>
+
+                        <form id="editProfileForm" class="profile-form">
+                            <div id="editProfileAlert" style="display: none;" class="alert-banner"></div>
+
+                            <div class="profile-form-grid">
+                                <div class="form-group form-group-full">
+                                    <label for="editFullName">Full Name *</label>
+                                    <div class="form-input-wrap">
+                                        <i class="far fa-user input-icon"></i>
+                                        <input type="text" id="editFullName" name="name" required placeholder="Enter your full name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editUsername">Username</label>
+                                    <div class="form-input-wrap">
+                                        <i class="fas fa-at input-icon"></i>
+                                        <input type="text" id="editUsername" disabled readonly placeholder="Username">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editEmail">Email Address</label>
+                                    <div class="form-input-wrap">
+                                        <i class="far fa-envelope input-icon"></i>
+                                        <input type="email" id="editEmail" disabled readonly placeholder="Email address">
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-group-full">
+                                    <label for="editPhone">Contact Phone Number</label>
+                                    <div class="form-input-wrap">
+                                        <i class="fas fa-phone input-icon"></i>
+                                        <input type="tel" id="editPhone" name="phone" placeholder="+977 98XXXXXXXX">
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-group-full">
+                                    <label for="editAddress">Street / Delivery Address</label>
+                                    <div class="form-input-wrap">
+                                        <i class="fas fa-location-dot input-icon"></i>
+                                        <input type="text" id="editAddress" name="address" placeholder="Apartment, suite, street name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editCity">City</label>
+                                    <div class="form-input-wrap">
+                                        <i class="fas fa-city input-icon"></i>
+                                        <input type="text" id="editCity" name="city" placeholder="Kathmandu">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editPostalCode">Postal / Zip Code</label>
+                                    <div class="form-input-wrap">
+                                        <i class="fas fa-map-pin input-icon"></i>
+                                        <input type="text" id="editPostalCode" name="postalCode" placeholder="44600">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions-row">
+                                <button type="button" class="btn btn-outline" onclick="resetProfileForm()">Discard Changes</button>
+                                <button type="submit" class="btn btn-primary" id="saveProfileBtn">
+                                    <i class="fas fa-check" style="margin-right: 0.4rem;"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="securityTab" class="tab-pane">
+                        <div class="panel-header">
+                            <h2>Security & Password</h2>
+                            <p>Keep your account secure with a strong password. Passwords must be at least 6 characters.</p>
+                        </div>
+
+                        <form id="changePasswordForm" class="profile-form" style="max-width: 540px;">
+                            <div id="changePasswordAlert" style="display: none;" class="alert-banner"></div>
+
+                            <div class="form-group" style="margin-bottom: 1.25rem;">
+                                <label for="currentPassword">Current Password *</label>
+                                <div class="form-input-wrap">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input type="password" id="currentPassword" name="currentPassword" required placeholder="Enter current password">
+                                    <button type="button" class="form-toggle-pwd" onclick="togglePwdVisibility('currentPassword', this)">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 1.25rem;">
+                                <label for="newPassword">New Password *</label>
+                                <div class="form-input-wrap">
+                                    <i class="fas fa-key input-icon"></i>
+                                    <input type="password" id="newPassword" name="newPassword" minlength="6" required placeholder="Minimum 6 characters">
+                                    <button type="button" class="form-toggle-pwd" onclick="togglePwdVisibility('newPassword', this)">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 1.5rem;">
+                                <label for="confirmPassword">Confirm New Password *</label>
+                                <div class="form-input-wrap">
+                                    <i class="fas fa-check-double input-icon"></i>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" minlength="6" required placeholder="Re-enter new password">
+                                    <button type="button" class="form-toggle-pwd" onclick="togglePwdVisibility('confirmPassword', this)">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-actions-row" style="justify-content: flex-start;">
+                                <button type="submit" class="btn btn-primary" id="updatePasswordBtn">
+                                    <i class="fas fa-shield-halved" style="margin-right: 0.4rem;"></i> Update Password
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="ordersTab" class="tab-pane">
+                        <div class="panel-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: gap; gap: 1rem;">
+                            <div>
+                                <h2>Your Orders</h2>
+                                <p>Review purchase summaries or visit the full order history ledger.</p>
+                            </div>
+                            <a href="../order/list.html" class="btn btn-outline btn-sm">
+                                Full Order Ledger <i class="fas fa-arrow-up-right-from-square" style="margin-left: 0.35rem;"></i>
+                            </a>
+                        </div>
+
+                        <div id="fullOrdersList" class="profile-orders-list">
+                            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Loading orders...</p>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>HIGH GRAND</h3>
+                <p class="tagline">Own Your Version</p>
+                <p class="footer-desc">Premium fashion wear and accessories for the modern lifestyle. Quality, style, and confidence in every piece.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="../product/category.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Fashion Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="../order/list.html">Order History</a></li>
+                    <li><a href="favorites.html">My Favorites</a></li>
+                    <li><a href="../cart/cart.html">Shopping Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +977 980-1234567</p>
+                <p><i class="fas fa-envelope"></i> support@highgrand.com</p>
+                <p><i class="fas fa-location-dot"></i> Kathmandu, Nepal</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 High Grand. All rights reserved. | Smart E-Commerce Management System</p>
+        </div>
+    </footer>
+
+    <script src="../../js/home.js"></script>
+
+    <script>
+        let currentProfileData = null;
+
+        function getFavoritesCount() {
+            try {
+                const favs = JSON.parse(localStorage.getItem('highgrand_favorites') || '[]');
+                return Array.isArray(favs) ? favs.length : 0;
+            } catch (e) {
+                return 0;
+            }
+        }
+
+        function formatMoney(amount) {
+            return 'Rs. ' + Number(amount || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+        }
+
+        function getStatusClass(status) {
+            if (!status) return 'status-pending';
+            const s = status.toLowerCase();
+            if (s.includes('deliver') || s.includes('complete')) return 'status-delivered';
+            if (s.includes('ship') || s.includes('confirm') || s.includes('process')) return 'status-shipped';
+            if (s.includes('cancel')) return 'status-cancelled';
+            return 'status-pending';
+        }
+
+        // Toggle Password Visibility
+        function togglePwdVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'far fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'far fa-eye';
+            }
+        }
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.profile-menu li').forEach(li => li.classList.remove('active'));
+
+            const targetPane = document.getElementById(tabId);
+            if (targetPane) targetPane.classList.add('active');
+
+            const menuLi = document.querySelector(`.profile-menu li[data-tab="${tabId}"]`);
+            if (menuLi) menuLi.classList.add('active');
+
+            window.scrollTo({ top: targetPane.offsetTop - 100, behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.profile-menu li[data-tab]').forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.preventDefault();
+                const tab = this.getAttribute('data-tab');
+                if (tab) switchTab(tab);
+            });
+        });
+
+        // Show Alert Helper
+        function showAlert(containerId, message, isSuccess) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.className = 'alert-banner ' + (isSuccess ? 'alert-success' : 'alert-error');
+            container.innerHTML = `<i class="fas fa-${isSuccess ? 'circle-check' : 'circle-exclamation'}"></i> <span>${message}</span>`;
+            container.style.display = 'flex';
+            setTimeout(() => {
+                container.style.display = 'none';
+            }, 6000);
+        }
+
+        // Render Profile Data
+        function populateProfileUI(data) {
+            currentProfileData = data;
+
+            // Avatar Monogram
+            const nameParts = (data.name || 'User').trim().split(/\s+/);
+            const monogram = nameParts.length > 1
+                ? (nameParts[0][0] + nameParts[1][0]).toUpperCase()
+                : nameParts[0].slice(0, 2).toUpperCase();
+            document.getElementById('avatarMonogram').textContent = monogram;
+
+            // Role Badge
+            const role = (data.role || 'USER').toUpperCase();
+            const roleBadgeText = document.getElementById('roleBadgeText');
+            const roleBadge = document.getElementById('roleBadge');
+            const statTier = document.getElementById('statAccountTier');
+
+            if (role.includes('ADMIN')) {
+                roleBadgeText.textContent = 'Administrator';
+                roleBadge.innerHTML = '<i class="fas fa-crown"></i> <span>Administrator</span>';
+                statTier.textContent = 'Administrator';
+            } else {
+                roleBadgeText.textContent = 'VIP Member';
+                statTier.textContent = 'VIP Member';
+            }
+
+            // Names & Handles
+            document.getElementById('sideUserName').textContent = data.name || 'Valued Member';
+            document.getElementById('sideUserHandle').textContent = '@' + (data.username || 'user');
+
+            // Header/Badge counters
+            const favCount = getFavoritesCount();
+            document.getElementById('menuFavCount').textContent = favCount;
+            document.getElementById('statWishlistCount').textContent = favCount;
+            document.getElementById('menuOrderCount').textContent = data.orderCount || 0;
+            document.getElementById('statOrdersCount').textContent = data.orderCount || 0;
+            document.getElementById('statMemberSince').textContent = data.memberSince || '2026';
+
+            // Overview details
+            document.getElementById('overviewName').textContent = data.name || 'Not provided';
+            document.getElementById('overviewEmail').textContent = data.email || 'Not provided';
+            document.getElementById('overviewUsername').textContent = data.username || 'Not provided';
+            document.getElementById('overviewPhone').textContent = data.phone || 'Not set (add in edit info)';
+
+            const fullAddr = [data.address, data.city, data.postalCode].filter(Boolean).join(', ');
+            document.getElementById('overviewAddress').textContent = fullAddr || 'No shipping address set yet.';
+
+            // Edit Profile Form Initial Values
+            document.getElementById('editFullName').value = data.name || '';
+            document.getElementById('editUsername').value = data.username || '';
+            document.getElementById('editEmail').value = data.email || '';
+            document.getElementById('editPhone').value = data.phone || '';
+            document.getElementById('editAddress').value = data.address || '';
+            document.getElementById('editCity').value = data.city || '';
+            document.getElementById('editPostalCode').value = data.postalCode || '';
+
+            // Render Recent Orders
+            renderRecentOrders(data.recentOrders || []);
+        }
+
+        function renderRecentOrders(orders) {
+            const container = document.getElementById('recentOrdersContainer');
+            const fullContainer = document.getElementById('fullOrdersList');
+
+            if (!orders || orders.length === 0) {
+                const emptyHtml = `
+                    <div style="text-align: center; padding: 2rem 1rem; background: var(--color-bg); border-radius: 8px;">
+                        <i class="fas fa-box-open" style="font-size: 2rem; color: var(--color-border); margin-bottom: 0.75rem;"></i>
+                        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1rem;">You have not placed any orders yet.</p>
+                        <a href="../product/category.html" class="btn btn-outline btn-sm"><i class="fas fa-shopping-bag"></i> Discover New Arrivals</a>
+                    </div>
+                `;
+                container.innerHTML = emptyHtml;
+                fullContainer.innerHTML = emptyHtml;
+                return;
+            }
+
+            let html = '';
+            orders.forEach(o => {
+                const statusClass = getStatusClass(o.status);
+                html += `
+                    <div class="order-card-compact">
+                        <div class="order-compact-info">
+                            <h4>Order #${o.orderNumber || o.id}</h4>
+                            <div class="order-compact-meta">
+                                <span><i class="far fa-calendar" style="margin-right: 0.25rem;"></i> ${o.date || ''}</span>
+                                &nbsp;&bull;&nbsp;
+                                <span>${o.itemCount || 1} item${(o.itemCount || 1) > 1 ? 's' : ''}</span>
+                            </div>
+                            <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-top: 0.35rem;">
+                                ${o.itemsSummary || 'High Grand luxury items'}
+                            </p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem;">
+                                ${formatMoney(o.totalAmount)}
+                            </div>
+                            <span class="order-compact-status ${statusClass}">${o.status || 'Pending'}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            fullContainer.innerHTML = html;
+        }
+
+        function resetProfileForm() {
+            if (currentProfileData) {
+                populateProfileUI(currentProfileData);
+                showAlert('editProfileAlert', 'Form fields reverted.', true);
+            }
+        }
+
+        // Fetch Profile on Page Load
+        async function loadProfile() {
+            const loading = document.getElementById('profileLoading');
+            const guest = document.getElementById('guestSection');
+            const dashboard = document.getElementById('profileDashboard');
+
+            try {
+                const res = await fetch('/api/user/profile');
+                loading.style.display = 'none';
+
+                if (res.status === 401 || res.status === 403) {
+                    guest.style.display = 'block';
+                    return;
+                }
+
+                if (!res.ok) {
+                    throw new Error('Failed to load profile.');
+                }
+
+                const data = await res.json();
+                dashboard.style.display = 'grid';
+                populateProfileUI(data);
+
+            } catch (err) {
+                loading.style.display = 'none';
+                guest.style.display = 'block';
+            }
+        }
+
+        // Handle Profile Form Submit
+        document.getElementById('editProfileForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('saveProfileBtn');
+            const origText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            btn.disabled = true;
+
+            const payload = {
+                name: document.getElementById('editFullName').value.trim(),
+                phone: document.getElementById('editPhone').value.trim(),
+                address: document.getElementById('editAddress').value.trim(),
+                city: document.getElementById('editCity').value.trim(),
+                postalCode: document.getElementById('editPostalCode').value.trim()
+            };
+
+            try {
+                const res = await fetch('/api/user/profile', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await res.json();
+                if (res.ok) {
+                    showAlert('editProfileAlert', result.message || 'Profile saved successfully.', true);
+                    // Update cached data
+                    if (currentProfileData) {
+                        Object.assign(currentProfileData, payload);
+                        populateProfileUI(currentProfileData);
+                    }
+                } else {
+                    showAlert('editProfileAlert', result.error || 'Failed to update profile.', false);
+                }
+            } catch (e) {
+                showAlert('editProfileAlert', 'An unexpected network error occurred.', false);
+            } finally {
+                btn.innerHTML = origText;
+                btn.disabled = false;
+            }
+        });
+
+        // Handle Change Password Submit
+        document.getElementById('changePasswordForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const cur = document.getElementById('currentPassword').value;
+            const newP = document.getElementById('newPassword').value;
+            const conf = document.getElementById('confirmPassword').value;
+
+            if (newP !== conf) {
+                showAlert('changePasswordAlert', 'New passwords do not match.', false);
+                return;
+            }
+
+            const btn = document.getElementById('updatePasswordBtn');
+            const origText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/user/change-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        currentPassword: cur,
+                        newPassword: newP,
+                        confirmPassword: conf
+                    })
+                });
+
+                const result = await res.json();
+                if (res.ok) {
+                    showAlert('changePasswordAlert', result.message || 'Password changed successfully.', true);
+                    document.getElementById('changePasswordForm').reset();
+                } else {
+                    showAlert('changePasswordAlert', result.error || 'Failed to update password.', false);
+                }
+            } catch (e) {
+                showAlert('changePasswordAlert', 'An unexpected network error occurred.', false);
+            } finally {
+                btn.innerHTML = origText;
+                btn.disabled = false;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+
+</html>

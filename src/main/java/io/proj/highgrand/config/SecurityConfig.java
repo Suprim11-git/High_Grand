@@ -65,6 +65,8 @@ public class SecurityConfig {
                                 "/home",
                                 "/index",
                                 "/Home.html",
+                                "/profile",
+                                "/account",
                                 "/error",
                                 "/pages/auth/**",
                                 "/pages/product/**",
@@ -79,7 +81,7 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // --------------------------------
-                        // Public product/category/order APIs
+                        // Public product/category/order/user APIs
                         // --------------------------------
                         .requestMatchers(
                                 "/api/products",
@@ -88,6 +90,8 @@ public class SecurityConfig {
                                 "/api/categories/**",
                                 "/api/orders",
                                 "/api/orders/**",
+                                "/api/user",
+                                "/api/user/**",
                                 "/api/admin/dashboard/**"
                         ).permitAll()
 
@@ -96,7 +100,9 @@ public class SecurityConfig {
                         // --------------------------------
                         .requestMatchers(
                                 "/register",
-                                "/login"
+                                "/login",
+                                "/forgot-password",
+                                "/reset-password"
                         ).permitAll()
 
                         // --------------------------------
@@ -197,13 +203,10 @@ public class SecurityConfig {
                         passwordEncoder.encode("admin123")
                 );
 
-// ADMIN role
                 admin.setRoleId(2L);
                 admin.setRole("ADMIN");
 
                 admin.setEnabled(true);
-
-                userRepository.save(admin);
 
                 userRepository.save(admin);
 

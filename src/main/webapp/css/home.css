@@ -373,10 +373,13 @@ button {
 }
 
 .hero-card {
+    display: block;
     position: relative;
     border-radius: var(--radius);
     overflow: hidden;
     min-height: 280px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .hero-card img {
@@ -412,34 +415,88 @@ button {
     text-transform: uppercase;
 }
 
+.cat-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.cat-section-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: 0.25rem;
+    color: var(--color-text);
+}
+
+.cat-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid transparent;
+    transition: color var(--transition), border-color var(--transition);
+}
+
+.cat-view-all:hover {
+    color: var(--color-gold);
+    border-color: var(--color-gold);
+}
+
+.cat-view-all i {
+    font-size: 0.7rem;
+    transition: transform var(--transition);
+}
+
+.cat-view-all:hover i {
+    transform: translateX(3px);
+}
+
 .category-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
+    gap: 1.5rem;
+    padding: 0 0 0.5rem;
 }
 
 .category-card {
     position: relative;
-    border-radius: var(--radius);
+    border-radius: 6px;
     overflow: hidden;
     aspect-ratio: 3 / 4;
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow var(--transition);
+    box-shadow: 0 4px 16px rgba(26,26,26,0.08);
+    transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+    border: 2px solid transparent;
+    display: block;
+    text-decoration: none;
 }
 
 .category-card:hover {
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 16px 40px rgba(26,26,26,0.15);
+    transform: translateY(-4px);
+    border-color: var(--color-gold);
 }
 
 .category-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
+    display: block;
 }
 
 .category-card:hover img {
-    transform: scale(1.06);
+    transform: scale(1.07);
 }
 
 .category-overlay {
@@ -448,32 +505,73 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1.5rem;
-    background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.7));
+    padding: 1.5rem 1.35rem;
+    background: linear-gradient(to top, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.18) 55%, transparent 100%);
     color: #fff;
+    transition: background 0.35s ease;
+}
+
+.category-card:hover .category-overlay {
+    background: linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.28) 60%, transparent 100%);
 }
 
 .category-overlay h3 {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 600;
-    margin-bottom: 0.35rem;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
-.category-overlay span {
-    font-size: 0.8rem;
+.category-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.82);
+    transition: color 0.25s ease, gap 0.25s ease;
+}
+
+.category-card:hover .category-cta {
+    color: var(--color-gold);
+    gap: 0.65rem;
+}
+
+.category-cta i {
+    font-size: 0.75rem;
+    transition: transform 0.25s ease;
+}
+
+.category-card:hover .category-cta i {
+    transform: translateX(4px);
+}
+
+.category-count-badge {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    background: rgba(26,26,26,0.72);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    opacity: 0.9;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.category-overlay span i {
-    margin-left: 0.35rem;
-    transition: transform var(--transition);
-}
-
-.category-card:hover .category-overlay span i {
-    transform: translateX(4px);
+.category-card:hover .category-count-badge {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .promo-banner {

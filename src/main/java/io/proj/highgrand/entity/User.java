@@ -1,6 +1,7 @@
 package io.proj.highgrand.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(
@@ -28,24 +29,36 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    /*
-     * Foreign key to roles.id
-     *
-     * 1 = USER
-     * 2 = ADMIN
-     */
     @Column(name = "role_id", nullable = false)
     private Long roleId;
 
-    /*
-     * Kept because the existing users table
-     * also contains the role column.
-     */
     @Column(nullable = false, length = 20)
     private String role = "USER";
 
     @Column(nullable = false)
     private boolean enabled = true;
+
+    @Column(length = 30)
+    private String phone;
+
+    @Column(name = "shipping_address", length = 255)
+    private String address;
+
+    @Column(length = 100)
+    private String city;
+
+    @Column(name = "postal_code", length = 20)
+    private String postalCode;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
 
     public User() {
     }
@@ -112,5 +125,45 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

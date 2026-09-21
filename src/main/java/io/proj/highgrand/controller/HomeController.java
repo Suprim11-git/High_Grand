@@ -15,4 +15,9 @@ public class HomeController {
     public String home() {
         return "forward:/Home.html";
     }
+
+    @GetMapping({"/profile", "/account"})
+    public String profile() {
+        return "redirect:/pages/account/profile.html";
+    }
 }

@@ -12,13 +12,10 @@
     <link rel="stylesheet" href="../../css/pages.css">
     <link rel="stylesheet" href="../../css/responsiveH.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 
 <body>
-    <div class="announcement-bar">
-        <p>Free shipping on orders over $75 &nbsp;|&nbsp; New Spring Collection now live</p>
-    </div>
-
     <header class="site-header">
         <div class="header-inner">
             <a href="../../Home.html" class="brand-logo">
@@ -35,7 +32,7 @@
             </nav>
             <div class="header-actions">
                 <div class="header-icons">
-                    <a href="../auth/login.html" aria-label="Account"><i class="fas fa-user"></i></a>
+                    <a href="../account/profile.html" aria-label="Account"><i class="fas fa-user"></i></a>
                     <a href="../cart/cart.html" aria-label="Shopping cart"><i class="fas fa-shopping-bag"></i></a>
                     <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
                         <i class="fas fa-bars"></i>
@@ -45,8 +42,11 @@
         </div>
         <nav class="mobile-nav" aria-label="Mobile navigation">
             <ul>
+                <li><a href="../../Home.html">Home</a></li>
+                <li><a href="../product/category.html">Shop</a></li>
                 <li><a href="../cart/cart.html">Cart</a></li>
                 <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="../account/profile.html">My Profile</a></li>
             </ul>
         </nav>
     </header>
@@ -96,27 +96,42 @@
                         <h3><i class="fas fa-map-marked-alt" style="color: var(--color-gold, #b8956a);"></i> Delivery Location (Map)</h3>
                         <span class="map-badge"><i class="fas fa-location-dot"></i> Map Integration Ready</span>
                     </div>
-                    <p style="font-size:0.83rem; color: var(--color-text-muted, #666); margin-bottom: 0.75rem;">
-                        Pin your delivery address on the interactive map space for precise delivery tracking.
+                    <p style="font-size:0.83rem; color:var(--color-text-muted, #666); margin-bottom: 0.75rem;">
+                        Search for your delivery location or drag the marker to the exact location.
                     </p>
-                    <div class="map-viewport-placeholder">
-                        <div class="map-grid-pattern"></div>
-                        <div class="map-pin-pulse">
-                            <i class="fas fa-location-dot"></i>
-                            <div class="map-pin-shadow"></div>
-                        </div>
-                        <div class="map-instructions">
-                            <i class="fas fa-info-circle"></i> Map canvas space ready for Google Maps / Leaflet integration
-                        </div>
+
+                    <div class="map-search-row">
+                        <input
+                                type="text"
+                                id="map-search"
+                                placeholder="Search delivery location..."
+                                autocomplete="off"
+                        >
+
+                        <button
+                                type="button"
+                                id="map-search-btn"
+                                class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </button>
                     </div>
+
+                    <p id="map-search-status" class="map-help-text"></p>
+                    <div id="checkout-map" class="checkout-map"></div>
+
+                    <p class="map-help-text">
+                        <i class="fas fa-hand-pointer"></i>
+                        Drag the marker to your exact delivery location.
+                    </p>
                     <div class="map-coords-row">
                         <div>
                             <label for="latitude">Latitude</label>
-                            <input type="text" id="latitude" name="latitude" value="27.7172° N" readonly style="font-size:0.85rem; background:#f4f4f4; color:#555;">
+                            <input type="text" id="latitude" name="latitude" value="27.7172" readonly style="font-size:0.85rem; background:#f4f4f4; color:#555;">
                         </div>
                         <div>
                             <label for="longitude">Longitude</label>
-                            <input type="text" id="longitude" name="longitude" value="85.3240° E" readonly style="font-size:0.85rem; background:#f4f4f4; color:#555;">
+                            <input type="text" id="longitude" name="longitude" value="85.3240" readonly style="font-size:0.85rem; background:#f4f4f4; color:#555;">
                         </div>
                     </div>
                 </div>
@@ -158,18 +173,415 @@
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>HIGH GRAND</h3>
+                <p class="tagline">Own Your Version</p>
+                <p class="footer-desc">Premium fashion wear and accessories for the modern lifestyle. Quality, style, and confidence in every piece.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../Home.html">Home</a></li>
+                    <li><a href="../product/category.html">Shop</a></li>
+                    <li><a href="../account/about.html">About Us</a></li>
+                    <li><a href="../account/blog.html">Fashion Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a href="../account/profile.html">My Profile</a></li>
+                    <li><a href="../order/list.html">Order History</a></li>
+                    <li><a href="../account/favorites.html">My Favorites</a></li>
+                    <li><a href="../cart/cart.html">Shopping Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +977 980-1234567</p>
+                <p><i class="fas fa-envelope"></i> support@highgrand.com</p>
+                <p><i class="fas fa-location-dot"></i> Kathmandu, Nepal</p>
+            </div>
+        </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 High Grand. All rights reserved.</p>
+            <p>&copy; 2026 High Grand. All rights reserved. | Smart E-Commerce Management System</p>
         </div>
     </footer>
 
     <script src="../../js/home.js"></script>
+    <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
     <script>
         (function () {
             'use strict';
 
             const CART_KEY = 'highgrand_cart';
+
+            // ---------------------------------------------------------
+// Delivery Map
+// ---------------------------------------------------------
+
+            let checkoutMap = null;
+            let deliveryMarker = null;
+
+            let deliveryLatitude = 27.7172;
+            let deliveryLongitude = 85.3240;
+
+            function initializeDeliveryMap() {
+
+                const mapElement = document.getElementById('checkout-map');
+
+                if (!mapElement) {
+                    return;
+                }
+
+                // Create map
+                checkoutMap = L.map('checkout-map').setView(
+                    [deliveryLatitude, deliveryLongitude],
+                    15
+                );
+
+                // OpenStreetMap tiles
+                L.tileLayer(
+                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    {
+                        maxZoom: 19,
+                        attribution:
+                            '&copy; OpenStreetMap contributors'
+                    }
+                ).addTo(checkoutMap);
+
+                // Create draggable marker
+                deliveryMarker = L.marker(
+                    [deliveryLatitude, deliveryLongitude],
+                    {
+                        draggable: true
+                    }
+                ).addTo(checkoutMap);
+
+                deliveryMarker
+                    .bindPopup(
+                        '<b>Delivery Location</b><br>' +
+                        'Drag this marker to your address.'
+                    )
+                    .openPopup();
+
+                deliveryMarker.on('dragend', function () {
+
+                    const position =
+                        deliveryMarker.getLatLng();
+
+                    updateDeliveryCoordinates(
+                        position.lat,
+                        position.lng
+                    );
+
+                    reverseGeocodeDeliveryLocation(
+                        position.lat,
+                        position.lng
+                    );
+                });
+                // Also allow clicking directly on map
+                checkoutMap.on('click', function (event) {
+
+                    const lat = event.latlng.lat;
+                    const lng = event.latlng.lng;
+
+                    deliveryMarker.setLatLng([
+                        lat,
+                        lng
+                    ]);
+
+                    updateDeliveryCoordinates(
+                        lat,
+                        lng
+                    );
+
+                    reverseGeocodeDeliveryLocation(
+                        lat,
+                        lng
+                    );
+                });
+
+                // Fix map rendering if container was initially hidden/resized
+                setTimeout(function () {
+                    checkoutMap.invalidateSize();
+                }, 200);
+            }
+
+            function updateDeliveryCoordinates(lat, lng) {
+
+                deliveryLatitude = Number(lat).toFixed(6);
+                deliveryLongitude = Number(lng).toFixed(6);
+
+                const latitudeInput =
+                    document.getElementById('latitude');
+
+                const longitudeInput =
+                    document.getElementById('longitude');
+
+                if (latitudeInput) {
+                    latitudeInput.value = deliveryLatitude;
+                }
+
+                if (longitudeInput) {
+                    longitudeInput.value = deliveryLongitude;
+                }
+
+                console.log(
+                    'Delivery location:',
+                    deliveryLatitude,
+                    deliveryLongitude
+                );
+            }
+
+            async function searchDeliveryLocation() {
+
+                const searchInput =
+                    document.getElementById('map-search');
+
+                const status =
+                    document.getElementById('map-search-status');
+
+                if (!searchInput || !checkoutMap || !deliveryMarker) {
+                    return;
+                }
+
+                const query = searchInput.value.trim();
+
+                if (!query) {
+                    status.textContent =
+                        'Please enter a location to search.';
+                    return;
+                }
+
+                status.textContent = 'Searching location...';
+
+                try {
+
+                    const url =
+                        'https://nominatim.openstreetmap.org/search?' +
+                        new URLSearchParams({
+                            q: query,
+                            format: 'jsonv2',
+                            addressdetails: '1',
+                            limit: '1',
+                            countrycodes: 'np'
+                        });
+
+                    const response = await fetch(url, {
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Location search failed.');
+                    }
+
+                    const results = await response.json();
+
+                    if (!results || results.length === 0) {
+                        status.textContent =
+                            'Location not found. Try another search.';
+                        return;
+                    }
+
+                    const result = results[0];
+
+                    const lat = Number(result.lat);
+                    const lng = Number(result.lon);
+
+                    // Move map
+                    checkoutMap.setView(
+                        [lat, lng],
+                        17
+                    );
+
+                    // Move marker
+                    deliveryMarker.setLatLng([
+                        lat,
+                        lng
+                    ]);
+
+                    // Update coordinates
+                    updateDeliveryCoordinates(
+                        lat,
+                        lng
+                    );
+
+                    // Update address
+                    updateAddressFromLocation(
+                        result
+                    );
+
+                    status.textContent =
+                        'Location found: ' +
+                        result.display_name;
+
+                    deliveryMarker
+                        .bindPopup(
+                            '<b>Delivery Location</b><br>' +
+                            escapeHtml(result.display_name)
+                        )
+                        .openPopup();
+
+                } catch (error) {
+
+                    console.error(
+                        'Location search error:',
+                        error
+                    );
+
+                    status.textContent =
+                        'Unable to search for this location.';
+                }
+            }
+            async function reverseGeocodeDeliveryLocation(
+                lat,
+                lng
+            ) {
+
+                const status =
+                    document.getElementById('map-search-status');
+
+                try {
+
+                    status.textContent =
+                        'Finding address...';
+
+                    const url =
+                        'https://nominatim.openstreetmap.org/reverse?' +
+                        new URLSearchParams({
+                            lat: lat,
+                            lon: lng,
+                            format: 'jsonv2',
+                            addressdetails: '1'
+                        });
+
+                    const response = await fetch(url, {
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(
+                            'Reverse geocoding failed.'
+                        );
+                    }
+
+                    const result =
+                        await response.json();
+
+                    if (!result || !result.display_name) {
+
+                        status.textContent =
+                            'Address could not be found for this location.';
+
+                        return;
+                    }
+
+                    updateAddressFromLocation(
+                        result
+                    );
+
+                    status.textContent =
+                        'Selected location: ' +
+                        result.display_name;
+
+                    deliveryMarker
+                        .bindPopup(
+                            '<b>Delivery Location</b><br>' +
+                            escapeHtml(result.display_name)
+                        )
+                        .openPopup();
+
+                } catch (error) {
+
+                    console.error(
+                        'Reverse geocoding error:',
+                        error
+                    );
+
+                    status.textContent =
+                        'Could not determine the address.';
+                }
+            }
+            // ---------------------------------------------------------
+// Update checkout address from geocoded location
+// ---------------------------------------------------------
+            function updateAddressFromLocation(location) {
+
+                const addressInput =
+                    document.getElementById('address');
+
+                const cityInput =
+                    document.getElementById('city');
+
+                const postalInput =
+                    document.getElementById('postal');
+
+                if (!location) {
+                    return;
+                }
+
+                const address =
+                    location.address || {};
+
+                let streetAddress = '';
+
+                if (address.house_number) {
+                    streetAddress +=
+                        address.house_number + ' ';
+                }
+
+                if (address.road) {
+                    streetAddress +=
+                        address.road;
+                }
+
+                if (!streetAddress) {
+
+                    streetAddress =
+                        address.neighbourhood ||
+                        address.suburb ||
+                        location.display_name ||
+                        '';
+                }
+
+                if (addressInput) {
+                    addressInput.value =
+                        streetAddress.trim();
+                }
+
+                if (cityInput) {
+
+                    cityInput.value =
+                        address.city ||
+                        address.town ||
+                        address.municipality ||
+                        address.village ||
+                        address.suburb ||
+                        cityInput.value;
+                }
+
+                if (postalInput &&
+                    address.postcode) {
+
+                    postalInput.value =
+                        address.postcode;
+                }
+            }
 
             let selectedProducts = [];
             let grandTotal = 0;
@@ -703,6 +1115,15 @@
                         'postalCode',
                         postalCode
                     );
+                    formData.append(
+                        'latitude',
+                        deliveryLatitude
+                    );
+
+                    formData.append(
+                        'longitude',
+                        deliveryLongitude
+                    );
 
                     formData.append(
                         'itemsSummary',
@@ -859,14 +1280,73 @@
                 }
             }
 
-            // ---------------------------------------------------------
-            // Initialize
-            // ---------------------------------------------------------
+            async function autofillUserProfile() {
+                try {
+                    const res = await fetch('/api/user/profile');
+                    if (!res.ok) return;
+                    const u = await res.json();
+                    if (!u || !u.authenticated) return;
+
+                    const form = document.getElementById('checkoutForm');
+                    if (!form) return;
+
+                    const nameInput = form.querySelector('[name="fullname"]') || form.querySelector('[name="customerName"]');
+                    const emailInput = form.querySelector('[name="email"]') || form.querySelector('[name="customerEmail"]');
+                    const phoneInput = form.querySelector('[name="phone"]') || form.querySelector('[name="customerPhone"]');
+                    const addrInput = form.querySelector('[name="address"]') || form.querySelector('[name="shippingAddress"]');
+                    const cityInput = form.querySelector('[name="city"]');
+                    const postalInput = form.querySelector('[name="postal"]') || form.querySelector('[name="postalCode"]');
+
+                    if (nameInput && !nameInput.value && u.name) nameInput.value = u.name;
+                    if (emailInput && !emailInput.value && u.email) emailInput.value = u.email;
+                    if (phoneInput && !phoneInput.value && u.phone) phoneInput.value = u.phone;
+                    if (addrInput && !addrInput.value && u.address) addrInput.value = u.address;
+                    if (cityInput && !cityInput.value && u.city) cityInput.value = u.city;
+                    if (postalInput && !postalInput.value && u.postalCode) postalInput.value = u.postalCode;
+                } catch (e) {
+                    // Ignore guest errors
+                }
+            }
+
             document.addEventListener(
                 'DOMContentLoaded',
                 function () {
 
                     initializeCheckoutSummary();
+
+                    autofillUserProfile();
+
+                    // Initialize delivery map
+                    initializeDeliveryMap();
+                    const mapSearchBtn =
+                        document.getElementById('map-search-btn');
+
+                    const mapSearchInput =
+                        document.getElementById('map-search');
+
+                    if (mapSearchBtn) {
+
+                        mapSearchBtn.addEventListener(
+                            'click',
+                            searchDeliveryLocation
+                        );
+                    }
+
+                    if (mapSearchInput) {
+
+                        mapSearchInput.addEventListener(
+                            'keydown',
+                            function (event) {
+
+                                if (event.key === 'Enter') {
+
+                                    event.preventDefault();
+
+                                    searchDeliveryLocation();
+                                }
+                            }
+                        );
+                    }
 
                     const checkoutForm =
                         document.getElementById('checkoutForm');

@@ -499,10 +499,18 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = cats.map(c => {
             const img = c.hasImage ? `/api/categories/${c.id}/image` : '../assets/images/logo.png';
             const slug = c.slug || c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            const storefrontUrl = `../pages/product/category.html?category=${encodeURIComponent(c.name)}`;
 
             return `
                 <div class="category-card" data-id="${c.id}" data-name="${escapeHtml(c.name)}">
-                    <img src="${img}" alt="${escapeHtml(c.name)}" class="category-card-img">
+                    <div class="category-card-thumb">
+                        <img src="${img}" alt="${escapeHtml(c.name)}" class="category-card-img">
+                        <div class="category-card-overlay">
+                            <a href="${storefrontUrl}" class="category-view-link" target="_blank">
+                                <i class="fas fa-arrow-up-right-from-square"></i> View Products
+                            </a>
+                        </div>
+                    </div>
                     <div class="category-card-body">
                         <div class="category-card-header">
                             <h3 class="category-card-title">${escapeHtml(c.name)}</h3>
@@ -510,14 +518,26 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ${escapeHtml(c.status)}
                             </span>
                         </div>
-                        <div class="category-card-slug">/collections/${escapeHtml(slug)}</div>
-                        <p class="category-card-desc">${escapeHtml(c.description || '')}</p>
-                        <div class="category-card-footer">
-                            <span class="category-count">
+                        <div class="category-card-slug">
+                            <i class="fas fa-link"></i> /collections/${escapeHtml(slug)}
+                        </div>
+                        <p class="category-card-desc">${escapeHtml(c.description || 'No description provided.')}</p>
+                        <div class="category-card-stats">
+                            <span class="category-stat-pill">
                                 <i class="fas fa-box"></i> ${c.productCount || 0} Products
                             </span>
+                            <span class="category-stat-pill">
+                                <i class="fas fa-sort-numeric-up"></i> Priority ${c.displayOrder || 1}
+                            </span>
+                        </div>
+                        <div class="category-card-footer">
+                            <a href="${storefrontUrl}" class="category-footer-link" target="_blank">
+                                <i class="fas fa-store"></i> View on Storefront
+                            </a>
                             <div class="row-actions">
-                                <button type="button" class="btn btn-outline btn-sm" data-edit-cat="${c.id}">Edit</button>
+                                <button type="button" class="btn btn-outline btn-sm" data-edit-cat="${c.id}">
+                                    <i class="fas fa-pen"></i> Edit
+                                </button>
                                 <button type="button" class="btn btn-danger btn-sm" data-del-cat="${c.id}" data-name="${escapeHtml(c.name)}">
                                     <i class="fas fa-trash"></i>
                                 </button>
