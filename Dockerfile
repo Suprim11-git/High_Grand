@@ -2,7 +2,7 @@
 FROM eclipse-temurin:17-jdk
 
 #set the working directory inide the container
-WORKDIR/app
+WORKDIR / app
 
 RUN apt-get update && apt-get install -y maven
 
