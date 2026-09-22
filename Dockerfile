@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y maven
 
 COPY . .
 
-RUN mun clean package-DskipTests
+RUN mvn clean package -DskipTests
 
 EXPOSE 8080
 
